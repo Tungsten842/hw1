@@ -31,26 +31,27 @@
 }
 
 @media (max-width: 1100px) {
-  .left-bar {
-    display: none !important;
-  }
-
-  .content {
-    margin-left: 30px !important;
+  :root .content {
+    margin-left: 30px;
+    margin-top: 70px;
   }
 
   .top-bar {
-    display: flex !important;
+    display: flex;
   }
 
-  .content {
-    margin-top: 70px !important;
+  .left-bar {
+    display: none;
   }
 }
 
 @media (max-width: 450px) {
-  .right-featured-stuff {
-    display: none !important;
+  :root .content .featured-stuff .right-featured-stuff {
+    display: none;
+  }
+
+  .various-articles-article-text{
+    display: none;
   }
 }
 
@@ -134,8 +135,6 @@ body {
       width: 693px;
       display: flex;
       flex-direction: row;
-      margin: 0px !important;
-      margin-top: 0px !important;
       border-bottom: 1px solid #ddd;
     }
 
