@@ -1,3 +1,9 @@
+function changeimg(event) {
+  console.log(event.src);
+    event.src = "img/musk2.jpg"
+}
+
+
 function add_piece() {
   let element = document.querySelector('.right-featured-stuff');
 
@@ -41,3 +47,4 @@ element.addEventListener("keydown",(event) => {
     add_piece(event);
   }
 });
+addEventListener("mouseover", (event) => {});
