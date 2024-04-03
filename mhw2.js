@@ -29,13 +29,15 @@ function add_piece() {
 function toggle_bar(event) {
   const left_bar = document.querySelector('.left-bar');
   const element = document.querySelector('.content');
-  if ( left_bar.style.display !== 'none' ) {
-    left_bar.style.display = 'none';
-    element.style.marginLeft = "30px";
+  if ( left_bar.classList.contains('hidden') ) {
+    //left_bar.style.display = 'none';
+    left_bar.classList.remove('hidden');
+    element.style.marginLeft = "210px";
   }
   else {
-    left_bar.style.display = 'flex';
-    element.style.marginLeft = "210px";
+    //left_bar.style.display = 'flex';
+    left_bar.classList.add('hidden');
+    element.style.marginLeft = "30px";
   }
 }
 const element = document.querySelector('*');
