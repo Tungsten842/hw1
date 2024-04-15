@@ -163,3 +163,7 @@ body {
 .hidden {
   display: none;
 }
+
+#chat {
+  height: 300px;
+}
