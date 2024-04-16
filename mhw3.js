@@ -3,7 +3,6 @@ function changeimg(event) {
   event.src = "img/musk2.jpg"
 }
 
-
 function add_piece() {
   let element = document.querySelector('.right-featured-stuff');
 
@@ -26,9 +25,22 @@ function add_piece() {
   element.appendChild(el);
 }
 
+var token = "";
 
-async function query(data) {
-  var token = "";
+async function text_to_speech(data) {
+  const response = await fetch(
+    "https://api-inference.huggingface.co/models/facebook/mms-tts-eng",
+    {
+      headers: { Authorization: "Bearer " + token },
+      method: "POST",
+      body: JSON.stringify(data),
+    }
+  );
+  const result = await response.blob();
+  return result;
+}
+
+async function make_request(data) {
   const response = await fetch(
     "https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.2",
     {
@@ -45,19 +57,35 @@ async function query(data) {
   return result;
 }
 
-function chat_response(message) {
-  query({ "inputs": '[INST]' + message + '[/INST]' }).then((response) => {
-    const textbox = document.getElementById("textbox");
-    textbox.innerText = message + '\n' + response[0].generated_text.replace('[INST]' + message + '[/INST]', '') + '\n';
-  });
-}
-
+var tts_audio;
 function search(event) {
   const previous_message = document.getElementById("textbox").innerText;
   const i_message = document.getElementById("prompt").value;
-  chat_response(previous_message + i_message);
+  let message = previous_message + i_message;
+
+  make_request({ "inputs": '[INST]' + message + '[/INST]' }).then((dirtyresponse) => {
+    const textbox = document.getElementById("textbox");
+
+    const response = dirtyresponse[0].generated_text.replace('[INST]' + message + '[/INST]', '');
+
+    textbox.innerText = message + '\n' + response + '\n';
+
+    text_to_speech({ "inputs": response }).then((response) => {
+      tts_audio = new Audio(URL.createObjectURL(response));
+      tts_audio.play();
+    });
+
+  });
+
+  document.getElementById("prompt").value = "";
+
   event.preventDefault();
+
+
 }
+
+// add form search event listener
+document.querySelector('form').addEventListener('submit', search);
 
 function toggle_bar(event) {
   const left_bar = document.querySelector('.left-bar');
@@ -86,5 +114,3 @@ element.addEventListener("keydown", (event) => {
 */
 
 addEventListener("mouseover", (event) => { });
-const form = document.querySelector('form');
-form.addEventListener('submit', search);
