@@ -69,6 +69,12 @@
 
 @media (1100px < width) {
   :root {
+    --text-scaling-dim: 1.2rem !important;
+  }
+}
+
+@media (1500px < width) {
+  :root {
     --text-scaling-dim: 1.5rem !important;
   }
 }
