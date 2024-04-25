@@ -9,7 +9,8 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
 </head>
 
 <body>
@@ -22,7 +23,7 @@
 
   <div class=left-bar>
     <img src="img/logo.png" alt="logo" class=logo-item>
-    <div class=login_item> Login</div>
+    <div class=login-item> Login</div>
     <div class=bar-item> Startup</div>
     <div class=bar-item> Venture</div>
     <div class=bar-item> Security</div>
@@ -35,43 +36,52 @@
   </div>
 
   <div class=content>
-    <div class=featured-stuff>
-      <div class=left-featured-stuff>
-        <h1>
+    <div class=main-view>
+      <div class=main-article>
+        <div class=main-article-title>
           Leaked SpaceX documents show company forbids employees to sell stock if it deems they’ve misbehaved
-        </h1>
+        </div>
         <div>
           'An act of dishonesty against the company' is among the violations cited
         </div>
         <img onclick="changeimg(this)" src="img/musk-spacex-employee-stock.webp" alt="musk" class=main-image>
       </div>
 
-      <div class="right-featured-stuff">
-        <div class="right-featured-stuff-item-title">Transportation</div>
-        <h3 class="right-featured-stuff-item" data-num="1">
-          Hyundai-backed Motional buys time with a bridge loan
-        </h3>
-        <div class="right-featured-stuff-author">Kirsten Korosec</div>
+      <div class="secondary-articles">
 
-        <div class="right-featured-stuff-item-title">AI</div>
-        <h3 class="right-featured-stuff-item" data-num="2">
-          India drops plan to require approval for AI model launches
-        </h3>
-        <div class="right-featured-stuff-author">Kirsten Korosec</div>
+        <div class="article-block">
+          <div class="article-block-category">Transportation</div>
+          <h3 class="article-block-text">
+            Hyundai-backed Motional buys time with a bridge loan
+          </h3>
+          <div class="article-block-author">Kirsten Korosec</div>
+        </div>
 
-        <div class="right-featured-stuff-item-title">Apps</div>
-        <h3 class="right-featured-stuff-item" data-num="3">
-          TechCrunch Minute: A TikTok ban is looking more and more like impending reality
-        </h3>
-        <div class="right-featured-stuff-author">Kirsten Korosec</div>
+        <div class="article-block">
+          <div class="article-block-category">AI</div>
+          <h3 class="article-block-text">
+            India drops plan to require approval for AI model launches
+          </h3>
+          <div class="article-block-author">Kirsten Korosec</div>
+        </div>
 
-        <div class="right-featured-stuff-item-title">Security</div>
-        <h3 class="right-featured-stuff-item" data-num="4">
-          How to verify a data breach
-        </h3>
-        <div class="right-featured-stuff-author">Kirsten Korosec</div>
+        <div class="article-block">
+          <div class="article-block-category">Apps</div>
+          <h3 class="article-block-text">
+            TechCrunch Minute: A TikTok ban is looking more and more like impending reality
+          </h3>
+          <div class="article-block-author">Kirsten Korosec</div>
+        </div>
+
+        <div class="article-block">
+          <div class="article-block-category">Security</div>
+          <h3 class="article-block-text">
+            How to verify a data breach
+          </h3>
+          <div class="article-block-author">Kyle Wiggers</div>
+        </div>
+
       </div>
-
     </div>
 
     <div class=various-articles>
@@ -100,7 +110,7 @@
 
     </div>
 
-
+    <!--
     <div id="chat">
       <form>
         <h1>Chatbot: ask questions about the articles</h1>
@@ -108,6 +118,7 @@
         <div id=textbox> </div>
       </form>
     </div>
+  -->
 
   </div>
 </body>
