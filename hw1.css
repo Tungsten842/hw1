@@ -188,11 +188,24 @@
       opacity: 0.5;
     }
 
-    .various-articles-article-title {
-      max-width: 366px;
-      margin-top: 0px;
-      margin-left: 10px;
-      font-weight: 850;
+
+    .various-articles-article-infos {
+      display: flex;
+      flex-direction: column;
+
+      .various-articles-article-category {
+        color: #00d301;
+      }
+
+      .various-articles-article-title {
+        max-width: 366px;
+        margin: 5px 0 10px;
+        font-weight: 850;
+      }
+
+      .various-articles-article-author {
+        margin-bottom: 10px;
+      }
     }
 
     .various-articles-article-text {
