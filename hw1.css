@@ -33,6 +33,15 @@
   }
 }
 
+.toggle_bar {
+  display: flex !important;
+  position: fixed;
+  right: 0;
+  left: unset !important;
+  background-color: white;
+  height: 100%;
+}
+
 .top-bar {
   padding-top: 30px;
   padding-left: 20px;

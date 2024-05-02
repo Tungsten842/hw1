@@ -1,3 +1,13 @@
+function toggle_bar() {
+  var x = document.querySelector(".left-bar");
+  //var y = document.querySelector("#logobaritem");
+  x.classList.toggle("toggle_bar");
+
+  var y = document.querySelector(".left-bar");
+
+}
+
+
 function changeimg(event) {
   console.log(event.src);
   event.src = "img/musk2.jpg"
@@ -87,20 +97,6 @@ function search(event) {
 // add form search event listener
 document.querySelector('form').addEventListener('submit', search);
 
-function toggle_bar(event) {
-  const left_bar = document.querySelector('.left-bar');
-  const element = document.querySelector('.content');
-  if (left_bar.classList.contains('hidden')) {
-    //left_bar.style.display = 'none';
-    left_bar.classList.remove('hidden');
-    element.style.marginLeft = "210px";
-  }
-  else {
-    //left_bar.style.display = 'flex';
-    left_bar.classList.add('hidden');
-    element.style.marginLeft = "30px";
-  }
-}
 /*
 const element = document.querySelector('*');
 element.addEventListener("keydown", (event) => {
