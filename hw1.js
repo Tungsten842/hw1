@@ -1,16 +1,6 @@
 function toggle_bar() {
   var x = document.querySelector(".left-bar");
-  //var y = document.querySelector("#logobaritem");
   x.classList.toggle("toggle_bar");
-
-  var y = document.querySelector(".left-bar");
-
-}
-
-
-function changeimg(event) {
-  console.log(event.src);
-  event.src = "img/musk2.jpg"
 }
 
 function add_piece() {
@@ -95,7 +85,7 @@ function search(event) {
 }
 
 // add form search event listener
-document.querySelector('form').addEventListener('submit', search);
+//document.querySelector('form').addEventListener('submit', search);
 
 /*
 const element = document.querySelector('*');
@@ -109,4 +99,4 @@ element.addEventListener("keydown", (event) => {
 });
 */
 
-addEventListener("mouseover", (event) => { });
+//addEventListener("mouseover", (event) => { });

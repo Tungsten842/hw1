@@ -48,7 +48,6 @@
   padding-right: 20px;
   padding-bottom: 30px;
   display: none;
-  flex-direction: row;
   justify-content: space-between;
   width: 100%;
   box-sizing: border-box;
@@ -63,59 +62,6 @@
   }
 }
 
-
-@media (width < 600px) {
-  :root {
-    --text-scaling-dim: 0.70rem !important;
-  }
-}
-
-@media (600px < width < 1100px) {
-  :root {
-    --text-scaling-dim: 1rem !important;
-  }
-}
-
-@media (1100px < width) {
-  :root {
-    --text-scaling-dim: 1.2rem !important;
-  }
-}
-
-@media (1500px < width) {
-  :root {
-    --text-scaling-dim: 1.5rem !important;
-  }
-}
-
-@media (width < 600px) {
-  :root .content .main-view .secondary-articles {
-    display: none;
-  }
-}
-
-
-@media (width < 600px) {
-  .various-articles-article-text {
-    display: none;
-  }
-}
-
-@media (width < 1100px) {
-  :root .content {
-    margin-left: 30px;
-    margin-top: 70px;
-  }
-
-  .top-bar {
-    display: flex;
-  }
-
-  .left-bar {
-    display: none;
-  }
-}
-
 .content {
   margin-left: 210px;
   display: flex;
@@ -124,7 +70,6 @@
 
   .main-view {
     display: flex;
-    flex-direction: row;
     padding-bottom: 20px;
     border-bottom: 1px solid #ddd;
     margin-top: 20px;
@@ -134,6 +79,7 @@
       flex-direction: column;
       max-width: 825px;
       margin-right: 20px;
+      font-size: calc(var(--text-scaling-dim)*1.1);
 
       .main-article-title {
         font-size: calc(var(--text-scaling-dim)*2.25);
@@ -189,14 +135,12 @@
     .various-articles-article {
       padding-top: 15px;
       display: flex;
-      flex-direction: row;
       border-bottom: 1px solid #ddd;
     }
 
     .various-articles-article:hover {
       opacity: 0.5;
     }
-
 
     .various-articles-article-infos {
       display: flex;
@@ -225,8 +169,51 @@
   }
 }
 
-.hidden {
-  display: none;
+:root body {
+  @media (width < 600px) {
+    --text-scaling-dim: 0.70rem;
+  }
+
+  @media (600px < width < 1100px) {
+    --text-scaling-dim: 1rem;
+  }
+
+  @media (1100px < width) {
+    --text-scaling-dim: 1.2rem;
+  }
+
+  @media (1500px < width) {
+    --text-scaling-dim: 1.5rem;
+  }
+}
+
+
+@media (width < 600px) {
+  :root .content .main-view .secondary-articles {
+    display: none;
+  }
+}
+
+
+@media (width < 600px) {
+  .various-articles-article-text {
+    display: none;
+  }
+}
+
+@media (width < 1100px) {
+  :root .content {
+    margin-left: 30px;
+    margin-top: 70px;
+  }
+
+  .top-bar {
+    display: flex;
+  }
+
+  .left-bar {
+    display: none;
+  }
 }
 
 #chat {
