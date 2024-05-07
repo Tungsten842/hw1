@@ -239,10 +239,7 @@
   :root .content .main-view .secondary-articles {
     display: none;
   }
-}
 
-
-@media (width < 600px) {
   .various-articles-article-text {
     display: none;
   }
