@@ -3,6 +3,21 @@ function toggle_bar() {
   x.classList.toggle("toggle_bar");
 }
 
+function login_popup() {
+  var x = document.querySelector(".login-register-form");
+  var y = document.querySelector("#mask");
+  if (x.style.display === "flex") {
+    x.style.display = "none";
+  } else {
+    x.style.display = "flex";
+  }
+  if (y.style.display === "flex") {
+    y.style.display = "none";
+  } else {
+    y.style.display = "flex";
+  }
+}
+
 function add_piece() {
   let element = document.querySelector('.right-featured-stuff');
 

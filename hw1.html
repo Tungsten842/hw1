@@ -22,7 +22,7 @@
 
   <div class=left-bar>
     <img src="img/logo.png" alt="logo" class=logo-item>
-    <div class=login-item> Login</div>
+    <div class=login-item onclick="login_popup()"> Login</div>
     <div class=bar-item> Startup</div>
     <div class=bar-item> Venture</div>
     <div class=bar-item> Security</div>
@@ -136,6 +136,22 @@
   -->
 
   </div>
+
+  <div class=login-register-form>
+    <input class=username-form placeholder="Username">
+    <input class=password-form type="password" placeholder="Password">
+
+    <div class=login-register-button>
+      <button>
+        REGISTER
+      </button>
+
+      <button>
+        LOGIN
+      </button>
+    </div>
+  </div>
+  <div id=mask onclick="login_popup()"></div>
 </body>
 
 </html>
