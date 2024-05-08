@@ -137,20 +137,18 @@
 
   </div>
 
-  <div class=login-register-form>
-    <input class=username-form placeholder="Username">
-    <input class=password-form type="password" placeholder="Password">
-
+  <form class=login-register-form>
+    <input type="text" name="name" class="username-form" placeholder="Name">
+    <input type="text" name="surname" class="username-form" placeholder="Surname">
+    <input type="text" name="email" class=username-form placeholder="Email">
+    <input type="password" name="password" class=password-form placeholder="Password">
+    <p id=login-error></p>
     <div class=login-register-button>
-      <button>
-        REGISTER
-      </button>
+      <input type="submit" value="Register">
 
-      <button>
-        LOGIN
-      </button>
+      <input type="submit" value="Login">
     </div>
-  </div>
+  </form>
   <div id=mask onclick="login_popup()"></div>
 </body>
 
