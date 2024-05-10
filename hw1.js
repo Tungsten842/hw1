@@ -18,6 +18,30 @@ function login_popup() {
   }
 }
 
+
+function auth_prompt(type) {
+  var formData = new FormData();
+
+  form = document.querySelector(".login-register-form");
+  for (let element of form.elements) {
+    if (element.type !== "submit") {
+      formData.append(element.name, element.value);
+    }
+  }
+  auth_api(formData, type);
+  //event.preventDefault()
+}
+async function auth_api(formData, type) {
+  const response = await fetch(type + ".php", {
+    method: "POST",
+    body: formData,
+  });
+  const text = await response.text();
+  const rbox = document.querySelector("#login-error");
+  rbox.textContent = text;
+  //alert(text);
+}
+/*
 document.querySelector(".login-register-form").addEventListener("submit", function(event) {
   var formData = new FormData();
 
@@ -30,17 +54,8 @@ document.querySelector(".login-register-form").addEventListener("submit", functi
   register_api(formData);
   event.preventDefault()
 });
+*/
 
-async function register_api(formData) {
-  const response = await fetch("register.php", {
-    method: "POST",
-    body: formData,
-  });
-  const text = await response.text();
-  const rbox = document.querySelector("#login-error");
-  rbox.textContent = text;
-  //alert(text);
-}
 
 function add_piece() {
   let element = document.querySelector('.right-featured-stuff');

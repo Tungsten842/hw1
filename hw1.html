@@ -144,9 +144,9 @@
     <input type="password" name="password" class=password-form placeholder="Password">
     <p id=login-error></p>
     <div class=login-register-button>
-      <input type="submit" value="Register">
+      <input type="button" name="register" value="Register" onclick="auth_prompt('register')">
 
-      <input type="submit" value="Login">
+      <input type="button" name="login" value="Login" onclick="auth_prompt('login')">
     </div>
   </form>
   <div id=mask onclick="login_popup()"></div>

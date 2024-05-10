@@ -1,22 +1,4 @@
 <?php
-// Start the session
-session_start();
-?>
-<?php
-
-// Create connection
-$conn = mysqli_connect("localhost", "website", "", "website");
-
-// Check connection
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
-
-
-//$name = $_POST['name'];
-
-// Set session variables
-//$_SESSION["error"] = "green";
 
 if ($_POST['name'] === "") {
     exit("Your must insert a name.");
@@ -50,29 +32,20 @@ if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
     exit("You must insert a valid email.");
 }
 
-$user = mysqli_real_escape_string($conn, $_POST['name']);
-$query = "SELECT * FROM Users WHERE name = '$user'";
+// Create connection
+$conn = mysqli_connect("localhost", "website", "", "website");
+// Check connection
+if (!$conn) {
+    exit("Connection failed: " . mysqli_connect_error());
+}
+
+$email = mysqli_real_escape_string($conn, $_POST['email']);
+$query = "SELECT * FROM Users WHERE email = '$email'";
 
 $result = mysqli_query($conn, $query);
 $rowcount = mysqli_num_rows($result);
 
 if ($rowcount === 0) {
-    $user_exists = 0;
-} else {
-    $user_exists = 1;
-}
-
-// if ($user_exists) {
-// $query = "SELECT password FROM Users WHERE name = '$user'";
-// $result = mysqli_query($conn, $query);
-// $rowcount = mysqli_num_rows($result);
-// } else {
-// echo "The user doesn't exists";
-// }
-
-if ($user_exists) {
-    exit("This user already exists");
-} else {
     //verify password
     if (strlen($_POST['password']) < 9) {
         exit("Your password must be longer than 9 chacters");
@@ -87,10 +60,11 @@ if ($user_exists) {
     $na = mysqli_real_escape_string($conn, $_POST['name']);
     $su = mysqli_real_escape_string($conn, $_POST['surname']);
     $em = mysqli_real_escape_string($conn, $_POST['email']);
-    $pa = password_hash($_POST['password'], PASSWORD_BCRYPT);
+    $pa = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
     $query = "INSERT INTO Users VALUES ('$na','$su','$em','$pa')";
     $result = mysqli_query($conn, $query);
     exit("Your account has been created.");
+} else {
+    exit("This email is already used.");
 }
-?> 
