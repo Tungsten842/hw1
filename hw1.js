@@ -1,6 +1,17 @@
 function toggle_bar() {
   var x = document.querySelector(".left-bar");
+  var z = document.querySelector(".left-bar-logo");
+
   x.classList.toggle("toggle_bar");
+  var y = document.querySelector("#mask");
+  if (y.style.display === "flex") {
+    y.style.display = "none";
+    z.style.display = "none";
+  } else {
+    y.style.display = "flex";
+    y.style.zIndex = 4;
+    z.style.display = "flex";
+  }
 }
 
 function login_popup() {

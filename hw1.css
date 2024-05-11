@@ -1,6 +1,6 @@
 .left-bar {
-  padding-left: 30px;
   padding-top: 30px;
+  padding-left: 30px;
   display: flex;
   flex-direction: column;
   width: 180px;
@@ -18,6 +18,15 @@
   .bar-item:hover {
     opacity: 0.5;
   }
+
+  .left-bar-logo {
+    display: none;
+    padding-right: 20px;
+    margin-left: auto;
+    height: 30px;
+    right: 0;
+  }
+
 
   .logo-item {
     width: 80px;
@@ -40,13 +49,13 @@
   left: unset !important;
   background-color: white;
   height: 100%;
+  top: 0;
 }
 
 .top-bar {
   padding-top: 30px;
   padding-left: 20px;
   padding-right: 20px;
-  padding-bottom: 30px;
   display: none;
   justify-content: space-between;
   width: 100%;
@@ -54,7 +63,7 @@
   position: fixed;
   top: 0;
   background-color: white;
-  z-index: 5;
+  z-index: 3;
 
   .top-bar-logo {
     height: 30px;
@@ -63,22 +72,22 @@
 }
 
 .content {
+  margin-top: 30px;
+  position: absolute;
   margin-left: 210px;
   display: flex;
   flex-direction: column;
-  max-width: 1310px;
+  right: 20px;
 
   .main-view {
     display: flex;
     padding-bottom: 20px;
     border-bottom: 1px solid #ddd;
-    margin-top: 20px;
 
     .main-article {
       display: flex;
       flex-direction: column;
       max-width: 825px;
-      margin-right: 20px;
       font-size: calc(var(--text-scaling-dim)*1.1);
 
       .main-article-title {
@@ -100,6 +109,7 @@
       display: flex;
       flex-direction: column;
       max-width: 458px;
+      margin-left: 20px;
 
       .article-block {
         margin-bottom: 25px;
@@ -128,7 +138,6 @@
   }
 
   .various-articles {
-    padding-top: 15px;
     display: flex;
     flex-direction: column;
 
@@ -175,8 +184,7 @@
   flex-direction: column;
   justify-content: space-evenly;
   z-index: 10;
-  background-color: grey;
-  border: 2px solid white;
+  background-image: linear-gradient(to left top, #1f7832, #2e893f, #3c9a4d, #4aac5b, #58be6a, #5aca6c, #5cd56d, #5ee16e, #54e960, #4bf04e, #41f836, #38ff00);
   box-shadow: 10px 5px 5px black;
   height: 80%;
   align-items: center;
@@ -248,7 +256,7 @@
 @media (width < 1100px) {
   :root .content {
     margin-left: 30px;
-    margin-top: 70px;
+    top: 60px;
   }
 
   .top-bar {
@@ -267,5 +275,9 @@
 :root {
   --text-scaling-dim: 1rem;
   font-family: "Montserrat", sans-serif;
+  margin: 0;
+}
+
+body {
   margin: 0;
 }
