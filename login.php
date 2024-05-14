@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 //$name = $_POST['name'];
 
@@ -20,21 +21,22 @@ if (!$conn) {
 }
 
 $email = mysqli_real_escape_string($conn, $_POST['email']);
-$query = "SELECT * FROM Users WHERE email = '$email'";
-
+$query = "SELECT email,password,admin FROM Users WHERE email = '$email'";
 $result = mysqli_query($conn, $query);
+$row = mysqli_fetch_row($result);
 $rowcount = mysqli_num_rows($result);
 
 if ($rowcount === 0) {
     exit("This email is not registered.");
 } else {
-    $email = mysqli_real_escape_string($conn, $_POST['email']);
-    $query = "SELECT password FROM Users WHERE email = '$email'";
-    $result = mysqli_query($conn, $query);
+    if (password_verify($_POST['password'], $row[1])) {
+        $_SESSION["email"] = $email;
+        # if admin
+        if ($row[2] === 1) {
+            $_SESSION["admin"] = 1;
+        }
 
-    $row = mysqli_fetch_row($result);
-    if (password_verify($_POST['password'], $row[0])) {
-        exit("You have been logged it successfully");
+        exit("You have been logged in successfully");
     } else {
         exit("The password is incorrect");
     }
