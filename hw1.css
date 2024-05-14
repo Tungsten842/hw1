@@ -113,6 +113,7 @@
 
       .article-block {
         margin-bottom: 25px;
+        min-width: 300px;
 
         .article-block-category {
           color: #00d301;
