@@ -1,5 +1,5 @@
 async function load_articles() {
-  const response = await fetch("get_articles.php", {
+  const response = await fetch("serv/get_articles.php", {
     method: "POST",
     body: "",
   });
@@ -102,7 +102,7 @@ function auth_prompt(type) {
   //event.preventDefault()
 }
 async function auth_api(formData, type) {
-  const response = await fetch(type + ".php", {
+  const response = await fetch("serv/" + type + ".php", {
     method: "POST",
     body: formData,
   });
