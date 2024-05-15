@@ -3,13 +3,13 @@ require 'token.php';
 // read body
 $prompt = file_get_contents('php://input');
 
-$curl = curl_init("https://api-inference.huggingface.co/models/Kvikontent/midjourney-v6");
+$curl = curl_init("https://api-inference.huggingface.co/models/runwayml/stable-diffusion-v1-5");
 curl_setopt($curl, CURLOPT_POST, 1);
-$payload =
-    '{
-     "inputs": "' . $prompt . '",
-     "parameters": {
-     }}';
+
+$jreq = array(
+    "inputs" => $prompt,
+);
+$payload = json_encode($jreq);
 
 //echo json_encode($payload);
 curl_setopt($curl, CURLOPT_POSTFIELDS, $payload);
@@ -22,6 +22,9 @@ curl_setopt($curl, CURLOPT_HTTPHEADER, $header);
 
 $image = curl_exec($curl);
 
-curl_close($curl);
+//$response_data = json_decode($response);
+//$image = $responseData['image']; // adjust the key as needed
 
-exit(base64_encode($image));
+echo base64_encode($image);
+
+//curl_close($curl);
