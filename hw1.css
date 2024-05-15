@@ -75,9 +75,9 @@
   margin-top: 30px;
   position: absolute;
   margin-left: 210px;
+  margin-right: 20px;
   display: flex;
   flex-direction: column;
-  right: 20px;
 
   .main-view {
     display: flex;

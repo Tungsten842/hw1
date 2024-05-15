@@ -1,4 +1,5 @@
 <?php require("header.html"); ?>
+<script src="index.js" defer></script>
     <div class=main-view>
       <div class=main-article>
         <div class=main-article-title>
@@ -40,7 +41,7 @@
 
       </div>
     </div>
-    <div class=various-articles>
-    </div>
+
+    <div class=various-articles></div>
 
 <?php require("footer.html"); ?>
