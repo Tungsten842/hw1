@@ -3,7 +3,7 @@ require 'token.php';
 // read body
 $prompt = file_get_contents('php://input');
 
-$curl = curl_init("https://api-inference.huggingface.co/models/runwayml/stable-diffusion-v1-5");
+$curl = curl_init("https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-xl-base-1.0");
 curl_setopt($curl, CURLOPT_POST, 1);
 
 $jreq = array(

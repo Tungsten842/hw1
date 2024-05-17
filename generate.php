@@ -8,10 +8,13 @@
 </form>
 
 <div>
-    <div class=text-result></div>
-    <div class=title-result></div>
-    <img src="" alt="" class=img-result>
-    <div class=comment-result></div>
+    <div id=title-result></div>
+    <div id=text-result></div>
+    <div id=author-result></div>
+    <img src="" alt="" id=image-result>
+    <div id=comment-result></div>
+    <div id=category-result></div>
+
     <button onclick="submit_article()">SUBMIT</button>
 </div>
 

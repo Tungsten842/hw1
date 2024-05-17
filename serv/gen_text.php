@@ -12,7 +12,7 @@ $prompt = "<|begin_of_text|>" . "<|start_header_id|>user<|end_header_id|>" . $in
 $jreq = array(
     "inputs" => $prompt,
     "parameters" => array(
-        "max_new_tokens" => 200,
+        "max_new_tokens" => 2000,
         "return_full_text" => false
     )
 );

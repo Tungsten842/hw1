@@ -11,22 +11,47 @@ if (!$conn) {
     exit("Connection failed: " . mysqli_connect_error());
 }
 
-
+$title = mysqli_real_escape_string($conn, $jin->title);
+$text = mysqli_real_escape_string($conn, $jin->text);
+$image = mysqli_real_escape_string($conn, $jin->image);
+$author = mysqli_real_escape_string($conn, $jin->author);
 $now = date('Y-m-d H:i:s');
 
-$a = mysqli_real_escape_string($conn, $jin[0]);
-$b = mysqli_real_escape_string($conn, $jin[1]);
-$c = mysqli_real_escape_string($conn, $jin[2]);
-//$email = mysqli_real_escape_string($conn, $_POST['email']);
-//$email = mysqli_real_escape_string($conn, $_POST['email']);
-
-
-$query = "INSERT INTO Articles (title, text, image, date) VALUES
-('$a','$b','/prova','$now')";
-print($query);
-
+$query = "INSERT INTO Articles (title, text, image, author, date) VALUES
+('$title','$text','$image','$author','$now')";
 $result = mysqli_query($conn, $query);
 
-exit($result);
-$row = mysqli_fetch_row($result);
-$rowcount = mysqli_num_rows($result);
+$article_id = mysqli_insert_id($conn);
+
+# Insert categories
+print_r($jin->category);
+$categories = json_decode($jin->category);
+for ($i = 0; $i < count($categories); $i++) {
+    //try {
+    //} catch (mysqli_sql_exception) {}
+
+    # Table Categories
+    $cat = mysqli_real_escape_string($conn, $categories[$i]);
+    $query = "INSERT INTO Categories (name) VALUES ('$cat')";
+    mysqli_query($conn, $query);
+
+    # Table Articles_Categories
+    $category_id = mysqli_insert_id($conn);
+    $query = "INSERT INTO Articles_Categories (article_id, category_id) VALUES
+      ('$article_id','$category_id')";
+    mysqli_query($conn, $query);
+}
+
+# Insert comments
+print_r($jin->comments);
+$comments = json_decode($jin->comments);
+print_r($comments);
+for ($i = 0; $i < count($comments); $i++) {
+    $name = mysqli_real_escape_string($conn, $comments[$i]->name);
+    $text = mysqli_real_escape_string($conn, $comments[$i]->text);
+
+    $query = "INSERT INTO Comments (article_id,name,text)
+      VALUES ('$article_id','$name','$text')";
+    mysqli_query($conn, $query);
+}
+exit();

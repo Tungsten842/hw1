@@ -3,51 +3,55 @@ async function load_articles() {
     method: "POST",
     body: "",
   });
-  const arr = await response.json();
+  const data = await response.json();
   //console.log(arr);
-  const main = document.querySelector(".main-article");
-  ch = main.children;
-  ch[0].textContent = arr[0][0];
-  ch[1].textContent = arr[0][1];
+  console.log(data);
 
-  let sec_articles = document.querySelectorAll('.article-block');
+  const main_article = document.querySelector(".main-article");
+
+  const article_num = data.length;
+  console.log(article_num);
+
+  main_article.innerHTML += `
+        <div class=main-article-title>
+        ${data[0].title}
+        </div>
+        <div>
+        ${data[0].author}
+        </div>
+        <img class=main-image src=data:image/jpg;base64,${data[0].image}>
+ `;
+
+  let sec_articles = document.querySelector('.secondary-articles');
   //console.log(sec_articles);
-  for (let n = 0; n < sec_articles.length; n++) {
-    child = sec_articles[n].children;
-    //console.log(child);
-    child[1].textContent = arr[1 + n][0];
+  for (let i = 1; i < 3 && i < article_num; i++) {
+    sec_articles.innerHTML += `
+      <div class="article-block">
+        <div class="article-block-category">${data[i].categories[0]}</div>
+        <h3 class="article-block-text">${data[i].title}</h3>
+        <div class="article-block-author">${data[i].author}</div>
+      </div>
+     `;
   }
+
   const various = document.querySelector(".various-articles");
 
-  for (let i = 5; i < 10; i++) {
-    /*
-    let div = document.createElement("div");
-    let newContent = document.createTextNode(arr[i][0]);
-    article.appendChild(newContent);
-    article.classList.add('various-articles-article');
-    various.appendChild(div);
-
-    div1 = document.createElement("div");
-    newContent = document.createTextNode(arr[i][0]);
-    article.appendChild(newContent);
-    article.classList.add('various-articles-article-infos');
-    div.appendChild(div1);
-    */
+  for (let i = 3; i < article_num; i++) {
     various.innerHTML += `
       <div class=various-articles-article>
         <div class=various-articles-article-infos>
           <div class=various-articles-article-category>
-          Startup
+          ${data[i].categories[0]}
           </div>
           <h3 class=various-articles-article-title>
-          ${arr[i][0]}
+          ${data[i].title}
           </h3>
           <div class=various-articles-article-author>
-          Kate park
+          ${data[i].author}
           </div>
         </div>
         <div class=various-articles-article-text>
-          ${arr[i][1]}
+          ${data[i].text}
         </div>
       </div>
     `;
