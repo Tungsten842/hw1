@@ -1,4 +1,6 @@
 <?php
+$tmp = file_get_contents("php://input");
+$input = json_decode($tmp);
 
 // Create connection
 $conn = mysqli_connect("localhost", "website", "", "website");
@@ -7,8 +9,11 @@ if (!$conn) {
     exit("Connection failed: " . mysqli_connect_error());
 }
 
-
-$query = "SELECT title,text,image,author,id FROM Articles ORDER BY date DESC";
+if (isset($input->id)) {
+    $query = "SELECT title,text,image,author,id FROM Articles WHERE id = $input->id";
+} else {
+    $query = "SELECT title,text,image,author,id FROM Articles ORDER BY date DESC";
+}
 $articles_list = mysqli_query($conn, $query);
 $articles_num = mysqli_num_rows($articles_list);
 
@@ -21,16 +26,19 @@ for ($i = 0; $i < $articles_num; $i++) {
     # COMMENTS
     $query = "SELECT Comments.name,Comments.text FROM Comments JOIN Articles
          ON Comments.article_id = Articles.id
-         WHERE Articles.id = '$article_id' AND name = NULL";
+         WHERE Articles.id = $article_id AND Comments.user_id IS NULL";
     $result = mysqli_query($conn, $query);
     $row_num = mysqli_num_rows($result);
 
     $comments[] = array();
     for ($j = 0; $j < $row_num; ++$j) {
         $row = mysqli_fetch_assoc($result);
-        $comments[$j]->title = $row["title"];
+        $comments[$j] = new stdClass();
+        $comments[$j]->name = $row["name"];
         $comments[$j]->text = $row["text"];
     }
+    #print_r($comments);
+    #TODO add non generated comments
 
     #CATEGORIES 
     $query = "SELECT Categories.name FROM Categories
@@ -48,6 +56,7 @@ for ($i = 0; $i < $articles_num; $i++) {
 
 
     $raw_req[$i] = array(
+        "id" => $article_id,
         "title" => $art_data["title"],
         "text" => $art_data["text"],
         "image" => $art_data["image"],

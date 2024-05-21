@@ -51,7 +51,7 @@ async function generate_apis(event) {
   const img = document.querySelector("#image-result");
   img.src = "data:image/jpg;base64," + img_base64;
   // COMMENT
-  const ctext = "Generate 3 realistic comments, write them as an array of name and text of the comment in json, for this article, Do not write anything else except for the json:" + rtext;
+  const ctext = "Generate 3 realistic comments for this article, write them as an array of name and text in json, Do not write anything else except for the JSON, always terminate the json array : " + rtext;
   response = await fetch("serv/gen_text.php", {
     method: "POST",
     body: ctext,
@@ -60,7 +60,7 @@ async function generate_apis(event) {
   const c_rbox = document.querySelector("#comment-result");
   c_rbox.textContent = c_rtext;
   // CATEGORIES
-  const ca_text = "Generate 4 categories, write it as an array of string in json for this article, every category must be a single word, Do not write anything else except for the json:" + rtext;
+  const ca_text = "Generate 4 categories, write it as an array of string in json for this article, every category must be a single word, Do not write anything else except for the JSON: " + rtext;
   response = await fetch("serv/gen_text.php", {
     method: "POST",
     body: ca_text,

@@ -27,25 +27,29 @@ $article_id = mysqli_insert_id($conn);
 print_r($jin->category);
 $categories = json_decode($jin->category);
 for ($i = 0; $i < count($categories); $i++) {
-    //try {
-    //} catch (mysqli_sql_exception) {}
 
-    # Table Categories
     $cat = mysqli_real_escape_string($conn, $categories[$i]);
-    $query = "INSERT INTO Categories (name) VALUES ('$cat')";
-    mysqli_query($conn, $query);
+    $query = "SELECT id FROM Categories WHERE name = '$cat'";
+    $result = mysqli_query($conn, $query);
+    # Table Categories
+    if ($result->num_rows == 0) {
+        $query = "INSERT INTO Categories (name) VALUES ('$cat')";
+        mysqli_query($conn, $query);
+        $category_id = mysqli_insert_id($conn);
+    } else {
+        $row = mysqli_fetch_assoc($result);
+        $category_id = $row["id"];
+    }
 
     # Table Articles_Categories
-    $category_id = mysqli_insert_id($conn);
     $query = "INSERT INTO Articles_Categories (article_id, category_id) VALUES
       ('$article_id','$category_id')";
     mysqli_query($conn, $query);
 }
 
 # Insert comments
-print_r($jin->comments);
 $comments = json_decode($jin->comments);
-print_r($comments);
+
 for ($i = 0; $i < count($comments); $i++) {
     $name = mysqli_real_escape_string($conn, $comments[$i]->name);
     $text = mysqli_real_escape_string($conn, $comments[$i]->text);
