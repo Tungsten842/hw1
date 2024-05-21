@@ -2,11 +2,6 @@
 <script src="index.js" defer></script>
     <div class=main-view>
       <div class=main-article>
-        <div class=main-article-title>
-        </div>
-        <div>
-        </div>
-        <img class=main-image>
       </div>
 
       <div class="secondary-articles">

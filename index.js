@@ -19,7 +19,7 @@ async function load_articles() {
         <div>
         ${data[0].author}
         </div>
-        <img class=main-image src=data:image/jpg;base64,${data[0].image}>
+        <img class=main-image alt="" src=data:image/jpg;base64,${data[0].image}>
  `;
 
   let sec_articles = document.querySelector('.secondary-articles');
@@ -51,7 +51,7 @@ async function load_articles() {
           </div>
         </div>
         <div class=various-articles-article-text>
-          ${data[i].text}
+          ${data[i].text.substring(0, 380)}
         </div>
       </div>
     `;

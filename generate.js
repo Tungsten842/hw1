@@ -60,7 +60,7 @@ async function generate_apis(event) {
   const c_rbox = document.querySelector("#comment-result");
   c_rbox.textContent = c_rtext;
   // CATEGORIES
-  const ca_text = "Generate 4 categories, write it as an array of string in json for this article, Do not write anything else except for the json:" + rtext;
+  const ca_text = "Generate 4 categories, write it as an array of string in json for this article, every category must be a single word, Do not write anything else except for the json:" + rtext;
   response = await fetch("serv/gen_text.php", {
     method: "POST",
     body: ca_text,
@@ -69,7 +69,7 @@ async function generate_apis(event) {
   const ca_rbox = document.querySelector("#category-result");
   ca_rbox.textContent = ca_rtext;
   // AUTHOR
-  const a_text = "Generate a random full name and nothing else";
+  const a_text = "Generate a random full name, for this article, do not write anything else execept for the name: " + l_rtext;
   response = await fetch("serv/gen_text.php", {
     method: "POST",
     body: a_text,
