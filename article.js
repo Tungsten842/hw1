@@ -5,7 +5,7 @@ function get_article_id() {
 }
 
 async function load_article() {
-  const request = { id: get_article_id };
+  const request = { id: get_article_id() };
 
   const response = await fetch("serv/get_articles.php", {
     method: "POST",
