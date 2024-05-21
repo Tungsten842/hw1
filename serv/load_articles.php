@@ -1,5 +1,9 @@
 <?php
 require 'token.php';
+session_start();
+if (!isset($_SESSION["admin"]) || $_SESSION["admin"] !== 1) {
+    exit("Access denied");
+}
 // read body
 $input = file_get_contents('php://input');
 $jin = json_decode($input);

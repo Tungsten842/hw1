@@ -1,4 +1,11 @@
-<?php require("header.html"); ?>
+<?
+session_start();
+if (!isset($_SESSION["admin"]) || $_SESSION["admin"] !== 1) {
+    exit("Access denied");
+}
+session_write_close();
+require("header.php");
+?>
 <script src="generate.js" defer></script>
 
 <form class=form-generate>

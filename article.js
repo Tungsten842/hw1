@@ -20,12 +20,13 @@ async function load_article() {
   const html = `
     <h2 id=a_title>${article.title}</h2>
     <div id=a_author>${article.author}</div>
-    <img id=a_img src="data:image/jpg;base64,${article.image}">
+    <img alt="" id=a_img src="data:image/jpg;base64,${article.image}">
     <div id=a_text>${article.text}</div>
   `;
   content.insertAdjacentHTML("afterbegin", html);
 
   comments = document.querySelector("#a_comments");
+  comments.innerHTML = "";
 
   for (const comm of article.comments) {
     const single_comment = document.createElement('div');
@@ -56,5 +57,6 @@ async function commment_prompt() {
     body: formData,
   });
   await response.text();
+  load_article()
 }
 

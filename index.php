@@ -1,4 +1,4 @@
-<?php require("header.html"); ?>
+<?php require("header.php"); ?>
 <script src="index.js" defer></script>
     <div class=main-view>
     <!--

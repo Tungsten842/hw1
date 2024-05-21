@@ -1,14 +1,16 @@
-<?php require("header.html"); ?>
+<?php
+require("header.php");
+?>
 <script src="article.js" defer></script>
 <link rel="stylesheet" href="article.css">
 
-<form id=a_comments>
-
-<form class=comment-form>
-    <input type="text" name="text" id="comment-text" placeholder="Comment">
-    <p id=comment-error></p>
-    <input type="button" name="Post" value="Post" onclick="commment_prompt()">
-</form>
-
+<div id=a_comments></div>
+<?php if (isset($_SESSION["user_id"])) {; ?>
+    <form class=comment-form>
+        <input type="text" name="text" id="comment-text" placeholder="Comment">
+        <p id=comment-error></p>
+        <input type="button" name="Post" value="Post" onclick="commment_prompt()">
+    </form>
+<?php } ?>
 
 <?php require("footer.html"); ?>

@@ -30,12 +30,12 @@ if ($rowcount === 0) {
     exit("This email is not registered.");
 } else {
     if (password_verify($_POST['password'], $user_info["password"])) {
-        $_SESSION["id"] = $user_info["id"];
+        $_SESSION["user_id"] = (int)$user_info["id"];
         $_SESSION["name"] = $user_info["name"];
 
         # if admin
-        if ($user_info["admin"] === 1) {
-            $_SESSION["admin"] = 1;
+        if (strcmp($user_info["admin"], 1) === 0) {
+            $_SESSION["admin"] = (int)1;
         }
         exit("You have been logged in successfully");
     } else {

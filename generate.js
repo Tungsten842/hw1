@@ -51,7 +51,8 @@ async function generate_apis(event) {
   const img = document.querySelector("#image-result");
   img.src = "data:image/jpg;base64," + img_base64;
   // COMMENT
-  const ctext = "Generate 3 realistic comments for this article, write them as an array of name and text in json, Do not write anything else except for the JSON, always terminate the json array : " + rtext;
+  const ctext = `Generate 3 realistic comments for this article, write them as an array of name and text in json, Do not write anything else except for the JSON,
+     you must always TERMINATE the JSON array and write 100% correct JSON:` + rtext;
   response = await fetch("serv/gen_text.php", {
     method: "POST",
     body: ctext,

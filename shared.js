@@ -31,6 +31,24 @@ function login_popup() {
 
 // login/register
 async function auth_prompt(type) {
+  const password = document.querySelector('.password-form').value;
+  const login_error = document.querySelector("#login-error");
+  // Verify password
+  if (type.localeCompare("register") === 0) {
+    if (password.length < 9) {
+      login_error.textContent = "Your password must be longer than 9 chacters";
+      return;
+    }
+    if (!/[0-9]/.test(password)) {
+      login_error.textContent = "Your password must contain numbers";
+      return;
+    }
+    if (!/[A-Z]/.test(password)) {
+      login_error.textContent = "Your password must contain an uppercase letter";
+      return;
+    }
+  }
+
   var formData = new FormData();
   form = document.querySelector(".login-register-form");
 
@@ -44,8 +62,7 @@ async function auth_prompt(type) {
     body: formData,
   });
   const text = await response.text();
-  const rbox = document.querySelector("#login-error");
-  rbox.textContent = text;
+  login_error.textContent = text;
 }
 /*
 document.querySelector(".login-register-form").addEventListener("submit", function(event) {

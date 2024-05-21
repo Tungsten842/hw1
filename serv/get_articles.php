@@ -25,8 +25,8 @@ for ($i = 0; $i < $articles_num; $i++) {
     $article_id = $art_data["id"];
 
     # USER COMMENTS
-    if (isset($_SESSION["id"])) {
-        $user_id = $_SESSION["id"];
+    if (isset($_SESSION["user_id"])) {
+        $user_id = $_SESSION["user_id"];
         $query = "SELECT Users.name,Comments.text FROM Comments JOIN Articles
          ON Comments.article_id = Articles.id
          JOIN Users ON Users.id = Comments.user_id
