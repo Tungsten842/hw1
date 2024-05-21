@@ -12,7 +12,7 @@ CREATE TABLE Users (
 );
 
 INSERT INTO Users (name,surname,email,password,admin)
-VALUES ("carlo", "carlo", "carlo@gmail.com", "$2y$10$hPPuku1gfzl3jLvpuxqAp.5jo4bPK2K7Au2wD4cu0wGpuWp3A/emG", 1);
+VALUES ("carlo", "rovigo", "carlo@gmail.com", "$2y$10$SUhtBOcp//1TJDFHwWn7herAKG3CbKJO8a11xwTLVLwxTgB4SG0Cy", 1);
 
 CREATE TABLE Articles (
   id INT AUTO_INCREMENT PRIMARY KEY,

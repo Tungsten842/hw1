@@ -1,4 +1,5 @@
 <?php
+session_start();
 $tmp = file_get_contents("php://input");
 $input = json_decode($tmp);
 
@@ -23,22 +24,42 @@ for ($i = 0; $i < $articles_num; $i++) {
     $art_data = mysqli_fetch_assoc($articles_list);
     $article_id = $art_data["id"];
 
-    # COMMENTS
+    # USER COMMENTS
+    if (isset($_SESSION["id"])) {
+        $user_id = $_SESSION["id"];
+        $query = "SELECT Users.name,Comments.text FROM Comments JOIN Articles
+         ON Comments.article_id = Articles.id
+         JOIN Users ON Users.id = Comments.user_id
+         WHERE Articles.id = $article_id AND Comments.name IS NULL
+         AND user_id = $user_id";
+        $result = mysqli_query($conn, $query);
+        $user_comments_num = mysqli_num_rows($result);
+
+        $comments[] = array();
+        for ($j = 0; $j < $user_comments_num; ++$j) {
+            $row = mysqli_fetch_assoc($result);
+            $comments[$j] = new stdClass();
+            $comments[$j]->name = $row["name"];
+            $comments[$j]->text = $row["text"];
+        }
+    } else {
+        $user_comments_num  = 0;
+    }
+
+    # GENERATED COMMENTS
     $query = "SELECT Comments.name,Comments.text FROM Comments JOIN Articles
          ON Comments.article_id = Articles.id
          WHERE Articles.id = $article_id AND Comments.user_id IS NULL";
     $result = mysqli_query($conn, $query);
     $row_num = mysqli_num_rows($result);
 
-    $comments[] = array();
-    for ($j = 0; $j < $row_num; ++$j) {
+    # Append comments to comments
+    for ($j = $user_comments_num; $j < $row_num + $user_comments_num; ++$j) {
         $row = mysqli_fetch_assoc($result);
         $comments[$j] = new stdClass();
         $comments[$j]->name = $row["name"];
         $comments[$j]->text = $row["text"];
     }
-    #print_r($comments);
-    #TODO add non generated comments
 
     #CATEGORIES 
     $query = "SELECT Categories.name FROM Categories

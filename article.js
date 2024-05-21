@@ -1,7 +1,11 @@
-async function load_article() {
+function get_article_id() {
   const params = new URLSearchParams(window.location.search);
   const id = params.get("id");
-  const request = { id: id };
+  return id;
+}
+
+async function load_article() {
+  const request = { id: get_article_id };
 
   const response = await fetch("serv/get_articles.php", {
     method: "POST",
@@ -40,3 +44,17 @@ async function load_article() {
   }
 }
 load_article();
+
+async function commment_prompt() {
+  var formData = new FormData();
+  text_el = document.querySelector("#comment-text");
+  formData.append(text_el.name, text_el.value);
+  formData.append("id", get_article_id());
+
+  const response = await fetch("serv/submit_comment.php", {
+    method: "POST",
+    body: formData,
+  });
+  await response.text();
+}
+

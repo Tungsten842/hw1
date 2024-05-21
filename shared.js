@@ -30,28 +30,22 @@ function login_popup() {
 }
 
 // login/register
-function auth_prompt(type) {
+async function auth_prompt(type) {
   var formData = new FormData();
-
   form = document.querySelector(".login-register-form");
+
   for (let element of form.elements) {
     if (element.type !== "submit") {
       formData.append(element.name, element.value);
     }
   }
-  auth_api(formData, type);
-  //event.preventDefault()
-}
-async function auth_api(formData, type) {
   const response = await fetch("serv/" + type + ".php", {
     method: "POST",
     body: formData,
   });
   const text = await response.text();
   const rbox = document.querySelector("#login-error");
-  //if (text.includes(""))
   rbox.textContent = text;
-  //alert(text);
 }
 /*
 document.querySelector(".login-register-form").addEventListener("submit", function(event) {
