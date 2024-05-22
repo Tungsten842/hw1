@@ -62,7 +62,8 @@ if ($rowcount === 0) {
     $em = mysqli_real_escape_string($conn, $_POST['email']);
     $pa = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-    $query = "INSERT INTO Users VALUES ('$na','$su','$em','$pa', 0)";
+    $query = "INSERT INTO Users (name, surname, email, password, admin)
+       VALUES ('$na','$su','$em','$pa', 0)";
     $result = mysqli_query($conn, $query);
     exit("Your account has been created.");
 } else {
