@@ -63,4 +63,7 @@ async function auth_prompt(type) {
   });
   const text = await response.text();
   login_error.textContent = text;
+  if (text.localeCompare("You have been logged in successfully.") == 0) {
+    window.location.href = "";
+  }
 }

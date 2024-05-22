@@ -37,8 +37,8 @@ if ($rowcount === 0) {
         if (strcmp($user_info["admin"], 1) === 0) {
             $_SESSION["admin"] = (int)1;
         }
-        exit("You have been logged in successfully");
+        exit("You have been logged in successfully.");
     } else {
-        exit("The password is incorrect");
+        exit("The password is incorrect.");
     }
 }

@@ -1,4 +1,4 @@
-<?php session_start()?>
+<?php session_start() ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,10 +23,19 @@
     <nav class=left-bar>
         <img src="img/menu-lines.png" alt="menu-lines" class=left-bar-logo onclick="toggle_bar()">
         <a href="./"><img src="img/logo.png" alt="logo" class=logo-item></a>
+
         <?php if (isset($_SESSION["admin"]) && $_SESSION["admin"] == 1) { ?>
-        <a href="generate.php">Generate</a>
+            <a href="generate.php">Generate</a>
         <?php } ?>
-        <div class=login-item onclick="login_popup()"> Login</div>
+
+        <?php if (isset($_SESSION["user_id"])) { ?>
+            <a href="serv/logout.php">Logout</a>
+        <?php } ?>
+
+        <?php if (!isset($_SESSION["user_id"])) { ?>
+            <div class=login-item onclick="login_popup()">Login</div>
+        <?php } ?>
+
         <div class=bar-item> Startup</div>
         <div class=bar-item> Venture</div>
         <div class=bar-item> Security</div>
