@@ -16,7 +16,8 @@ async function load_article() {
 
   console.log(data);
 
-  content = document.querySelector(".content");
+  content = document.querySelector("#a_post");
+  content.innerHTML = "";
   const html = `
     <h2 id=a_title>${article.title}</h2>
     <div id=a_author>${article.author}</div>
