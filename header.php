@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <title>TechCrunch</title>
-    <link rel="stylesheet" href="hw1.css">
+    <link rel="stylesheet" href="/shared.css">
     <script src="shared.js" defer></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">

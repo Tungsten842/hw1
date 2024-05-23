@@ -1,7 +1,7 @@
 <?php
 require("header.php");
 ?>
-<link rel="stylesheet" href="article.css">
+<link rel="stylesheet" href="/article.css">
 <script src="article.js" defer></script>
 
 <div id=a_post></div>
