@@ -1,8 +1,8 @@
 <?php
 require("header.php");
 ?>
-<script src="article.js" defer></script>
 <link rel="stylesheet" href="article.css">
+<script src="article.js" defer></script>
 
 <div id=a_post></div>
 <div id=a_comments></div>

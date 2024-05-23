@@ -57,7 +57,7 @@ async function auth_prompt(type) {
       formData.append(element.name, element.value);
     }
   }
-  const response = await fetch("serv/" + type + ".php", {
+  const response = await fetch("/serv/" + type + ".php", {
     method: "POST",
     body: formData,
   });

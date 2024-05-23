@@ -25,6 +25,7 @@ for ($i = 0; $i < $articles_num; $i++) {
     $article_id = $art_data["id"];
 
     # USER COMMENTS
+    $comments[] = array();
     if (isset($_SESSION["user_id"])) {
         $user_id = $_SESSION["user_id"];
         $query = "SELECT Users.name,Comments.text FROM Comments JOIN Articles
@@ -35,7 +36,6 @@ for ($i = 0; $i < $articles_num; $i++) {
         $result = mysqli_query($conn, $query);
         $user_comments_num = mysqli_num_rows($result);
 
-        $comments[] = array();
         for ($j = 0; $j < $user_comments_num; ++$j) {
             $row = mysqli_fetch_assoc($result);
             $comments[$j] = new stdClass();

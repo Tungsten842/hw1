@@ -1,5 +1,5 @@
 async function load_articles() {
-  const response = await fetch("serv/get_articles.php", {
+  const response = await fetch("/serv/get_articles.php", {
     method: "POST",
   });
   const data = await response.json();

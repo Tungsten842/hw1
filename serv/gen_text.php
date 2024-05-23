@@ -26,7 +26,12 @@ $header = [
 ];
 curl_setopt($curl, CURLOPT_HTTPHEADER, $header);
 
-$result = json_decode(curl_exec($curl));
+$tmp = curl_exec($curl);
+$httpcode = curl_getinfo($curl, CURLINFO_RESPONSE_CODE);
+if ($httpcode != 200) {
+    exit("Api error: " + $httpcode);
+}
+$result = json_decode($tmp);
 
 curl_close($curl);
 

@@ -12,7 +12,7 @@ async function submit_article() {
   image = document.querySelector("#image-result").src;
   arr['image'] = image.replace("data:image/jpg;base64,", "");
 
-  const response = await fetch("serv/load_articles.php", {
+  const response = await fetch("/serv/load_articles.php", {
     method: "POST",
     body: JSON.stringify(arr),
   });
@@ -26,7 +26,7 @@ async function generate_apis(event) {
   const text = document.querySelector("#prompt_text").value;
   const ptext = "YOU ARE AN EXCELLENT NEWSPAPER WRITER, Generate an newspaper article without the title, only the body and nothing else about: " + text;
 
-  let response = await fetch("serv/gen_text.php", {
+  let response = await fetch("/serv/gen_text.php", {
     method: "POST",
     body: ptext,
   });
@@ -35,7 +35,7 @@ async function generate_apis(event) {
   rbox.textContent = rtext;
   // TITLE
   const ltext = "Write 1 title for this article, Do not write anything else only one title:" + rtext;
-  response = await fetch("serv/gen_text.php", {
+  response = await fetch("/serv/gen_text.php", {
     method: "POST",
     body: ltext,
   });
@@ -43,7 +43,7 @@ async function generate_apis(event) {
   const l_rbox = document.querySelector("#title-result");
   l_rbox.textContent = l_rtext;
   // IMAGE
-  response = await fetch("serv/gen_img.php", {
+  response = await fetch("/serv/gen_img.php", {
     method: "POST",
     body: l_rtext,
   });
@@ -53,7 +53,7 @@ async function generate_apis(event) {
   // COMMENT
   const ctext = `Generate 3 realistic comments for this article, write them as an array of name and text in json, Do not write anything else except for the JSON,
      you must always TERMINATE the JSON array and write 100% correct JSON:` + rtext;
-  response = await fetch("serv/gen_text.php", {
+  response = await fetch("/serv/gen_text.php", {
     method: "POST",
     body: ctext,
   });
@@ -62,7 +62,7 @@ async function generate_apis(event) {
   c_rbox.textContent = c_rtext;
   // CATEGORIES
   const ca_text = "Generate 4 categories, write it as an array of string in json for this article, every category must be a single word, Do not write anything else except for the JSON: " + rtext;
-  response = await fetch("serv/gen_text.php", {
+  response = await fetch("/serv/gen_text.php", {
     method: "POST",
     body: ca_text,
   });
@@ -71,7 +71,7 @@ async function generate_apis(event) {
   ca_rbox.textContent = ca_rtext;
   // AUTHOR
   const a_text = "Generate a random full name, for this article, do not write anything else execept for the name: " + l_rtext;
-  response = await fetch("serv/gen_text.php", {
+  response = await fetch("/serv/gen_text.php", {
     method: "POST",
     body: a_text,
   });

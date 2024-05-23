@@ -7,7 +7,7 @@ function get_article_id() {
 async function load_article() {
   const request = { id: get_article_id() };
 
-  const response = await fetch("serv/get_articles.php", {
+  const response = await fetch("/serv/get_articles.php", {
     method: "POST",
     body: JSON.stringify(request),
   });
@@ -53,7 +53,7 @@ async function commment_prompt() {
   formData.append(text_el.name, text_el.value);
   formData.append("id", get_article_id());
 
-  const response = await fetch("serv/submit_comment.php", {
+  const response = await fetch("/serv/submit_comment.php", {
     method: "POST",
     body: formData,
   });
