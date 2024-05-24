@@ -6,7 +6,7 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"] !== 1) {
 session_write_close();
 require("header.php");
 ?>
-<script src="generate.js" defer></script>
+<script src="/generate.js" defer></script>
 
 <form class=form-generate>
     <label for="fname">Prompt:</label><br>

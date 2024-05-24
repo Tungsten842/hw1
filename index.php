@@ -1,5 +1,5 @@
 <?php require("header.php"); ?>
-<script src="index.js" defer></script>
+<script src="/index.js" defer></script>
     <div class=main-view>
     <!--
       <div class=main-article></div>
