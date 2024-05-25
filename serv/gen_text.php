@@ -24,7 +24,6 @@ $jreq = array(
     "model" => "command-r-plus",
     "message" => $prompt,
     "temperature" => 0.1,
-    "preamble" => "You are an excellent assistant that does exactily what asked."
 );
 /*
 $jreq = array(

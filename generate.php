@@ -6,22 +6,27 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"] !== 1) {
 session_write_close();
 require("header.php");
 ?>
+<link rel="stylesheet" href="/generate.css">
 <script src="/generate.js" defer></script>
 
-<form class=form-generate>
+<div id=form-generate>
     <label for="fname">Prompt:</label><br>
-    <input type="text" name="prompt" id="prompt_text"><br>
-    <input type="submit" value="Generate">
-    <button onclick="submit_article()">SUBMIT</button>
-</form>
-
-<div>
-    <h2 id=title-result></h2>
-    <div id=text-result></div>
-    <div id=author-result></div>
-    <img src="" alt="" id=image-result>
-    <div id=comment-result></div>
-    <div id=category-result></div>
+    <textarea name="comment" form="comment-form" placeholder="Insert the prompt" id="prompt-text"></textarea>
+    <div id=buttons-generate>
+        <button id=but-gen onclick="generate_apis()">Generate</button>
+        <button id=but-sub onclick="submit_article()">Submit</button>
+    </div>
 </div>
+
+<article>
+    <div class=article-title></div>
+    <div class=article-divider>
+        <img class=article-image src="data:," alt>
+        <div class=article-text></div>
+    </div>
+    <div class=article-author></div>
+    <div class=article-comments></div>
+    <div class=article-categories></div>
+</article>
 
 <?php require("footer.html"); ?>

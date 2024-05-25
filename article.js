@@ -4,6 +4,11 @@ function get_article_id() {
   return id;
 }
 
+function remove_comment() {
+
+  load_article()
+}
+
 async function load_article() {
   const request = { id: get_article_id() };
 
@@ -16,31 +21,41 @@ async function load_article() {
 
   console.log(data);
 
-  content = document.querySelector("#a_post");
+  content = document.querySelector("article");
   content.innerHTML = "";
   const html = `
-    <h2 id=a_title>${article.title}</h2>
-    <div id=a_author>${article.author}</div>
-    <img alt="" id=a_img src="data:image/jpg;base64,${article.image}">
-    <div id=a_text>${article.text}</div>
-  `;
+      <div class=article-title>${article.title}</div>
+      <div class=article-divider>
+          <img class=article-image src="data:image/jpg;base64,${article.image}" alt >
+          <div class=article-text>${article.text}</div>
+      </div>
+      <div class=article-author>${article.author}</div>
+      <div class=article-categories>${article.categories}</div>
+    `;
   content.insertAdjacentHTML("afterbegin", html);
 
-  comments = document.querySelector("#a_comments");
+  comments = document.querySelector(".article-comments");
   comments.innerHTML = "";
 
   for (const comm of article.comments) {
     const single_comment = document.createElement('div');
-    single_comment.className = 'single_comment';
+    single_comment.className = 'single-comment';
     comments.appendChild(single_comment);
 
     const comment_name = document.createElement('div');
-    comment_name.className = 'comment_name';
+    comment_name.className = 'comment-name';
     comment_name.textContent = comm.name;
     single_comment.appendChild(comment_name);
+ 
+    const comment_delete = document.createElement('div');
+    comment_delete.className = 'comment-delete';
+    comment_delete.textContent = "✕";
+    comment_delete.onclick = "remove_comment(${article.id})";
+    single_comment.appendChild(comment_delete);
+
 
     const comment_text = document.createElement('div');
-    comment_text.className = 'comment_text';
+    comment_text.className = 'comment-text';
     comment_text.textContent = comm.text;
     single_comment.appendChild(comment_text);
   }
@@ -49,8 +64,8 @@ load_article();
 
 async function commment_prompt() {
   var formData = new FormData();
-  text_el = document.querySelector("#comment-text");
-  formData.append(text_el.name, text_el.value);
+  text_el = document.querySelector("#user-comment-text");
+  formData.append("text", text_el.value);
   formData.append("id", get_article_id());
 
   const response = await fetch("/serv/submit_comment.php", {

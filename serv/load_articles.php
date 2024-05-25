@@ -27,8 +27,8 @@ $result = mysqli_query($conn, $query);
 $article_id = mysqli_insert_id($conn);
 
 # Insert categories
-print_r($jin->category);
-$categories = json_decode($jin->category);
+print_r($jin->categories);
+$categories = json_decode($jin->categories);
 for ($i = 0; $i < count($categories); $i++) {
 
     $cat = mysqli_real_escape_string($conn, $categories[$i]);
