@@ -14,11 +14,19 @@ if (!$conn) {
     exit("Connection failed: " . mysqli_connect_error());
 }
 
+# Write image
+$image = base64_decode($jin->image);
+$full_path = $_SERVER['DOCUMENT_ROOT'] . "/img/" . sha1($image);
+$fp = fopen($full_path, "w");
+fwrite($fp, $image);
+fclose($fp);
+
+$image = mysqli_real_escape_string($conn, $full_path);
 $title = mysqli_real_escape_string($conn, $jin->title);
 $text = mysqli_real_escape_string($conn, $jin->text);
-$image = mysqli_real_escape_string($conn, $jin->image);
 $author = mysqli_real_escape_string($conn, $jin->author);
 $now = date('Y-m-d H:i:s');
+
 
 $query = "INSERT INTO Articles (title, text, image, author, date) VALUES
 ('$title','$text','$image','$author','$now')";
@@ -27,7 +35,6 @@ $result = mysqli_query($conn, $query);
 $article_id = mysqli_insert_id($conn);
 
 # Insert categories
-print_r($jin->categories);
 $categories = json_decode($jin->categories);
 for ($i = 0; $i < count($categories); $i++) {
 

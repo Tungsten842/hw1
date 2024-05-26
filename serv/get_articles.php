@@ -28,7 +28,7 @@ for ($i = 0; $i < $articles_num; $i++) {
     $comments[] = array();
     if (isset($_SESSION["user_id"])) {
         $user_id = $_SESSION["user_id"];
-        $query = "SELECT Users.name,Comments.text FROM Comments JOIN Articles
+        $query = "SELECT Comments.id,Users.name,Comments.text FROM Comments JOIN Articles
          ON Comments.article_id = Articles.id
          JOIN Users ON Users.id = Comments.user_id
          WHERE Articles.id = $article_id AND Comments.name IS NULL
@@ -41,6 +41,7 @@ for ($i = 0; $i < $articles_num; $i++) {
             $comments[$j] = new stdClass();
             $comments[$j]->name = $row["name"];
             $comments[$j]->text = $row["text"];
+            $comments[$j]->id = $row["id"];
         }
     } else {
         $user_comments_num  = 0;
@@ -75,12 +76,19 @@ for ($i = 0; $i < $articles_num; $i++) {
         $categories[$j] = $row[0];
     }
 
+    # Read image
+    $full_path = $art_data["image"];
+    $fp = fopen($full_path, "r");
+    $tmp = fread($fp, filesize($full_path));
+    $image = base64_encode($tmp);
+    fclose($fp);
+
 
     $raw_req[$i] = array(
         "id" => $article_id,
         "title" => $art_data["title"],
         "text" => $art_data["text"],
-        "image" => $art_data["image"],
+        "image" => $image,
         "author" => $art_data["author"],
         "comments" => $comments,
         "categories" => $categories

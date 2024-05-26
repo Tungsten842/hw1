@@ -17,8 +17,8 @@ VALUES ("carlo", "rovigo", "carlo@gmail.com", "$2y$10$SUhtBOcp//1TJDFHwWn7herAKG
 CREATE TABLE Articles (
   id INT AUTO_INCREMENT PRIMARY KEY,
   title VARCHAR(200) NOT NULL,
-  text VARCHAR(5000) NOT NULL,
-  image LONGTEXT NOT NULL,
+  text TEXT(20000) NOT NULL,
+  image varchar(255) NOT NULL,
   author VARCHAR(30) NOT NULL,
   date DATETIME NOT NULL
 );
