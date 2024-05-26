@@ -12,7 +12,7 @@ async function load_articles() {
   <a href="article.php?id=${data[0].id}" class=main-article>
     <div class=main-article-title>${data[0].title}</div>
     <div>${data[0].author}</div>
-    <img class=main-image alt="" src=data:image/jpg;base64,${data[0].image}>
+    <img class=main-image alt="" src=${data[0].image}>
   </a>
  `;
 

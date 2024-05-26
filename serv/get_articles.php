@@ -76,19 +76,11 @@ for ($i = 0; $i < $articles_num; $i++) {
         $categories[$j] = $row[0];
     }
 
-    # Read image
-    $full_path = $art_data["image"];
-    $fp = fopen($full_path, "r");
-    $tmp = fread($fp, filesize($full_path));
-    $image = base64_encode($tmp);
-    fclose($fp);
-
-
     $raw_req[$i] = array(
         "id" => $article_id,
         "title" => $art_data["title"],
         "text" => $art_data["text"],
-        "image" => $image,
+        "image" => $art_data["image"],
         "author" => $art_data["author"],
         "comments" => $comments,
         "categories" => $categories

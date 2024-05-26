@@ -16,12 +16,12 @@ if (!$conn) {
 
 # Write image
 $image = base64_decode($jin->image);
-$full_path = $_SERVER['DOCUMENT_ROOT'] . "/img/" . sha1($image);
-$fp = fopen($full_path, "w");
+$image_path = "/img/" . sha1($image) . ".jpeg";
+$fp = fopen($_SERVER['DOCUMENT_ROOT'] . $image_path, "w");
 fwrite($fp, $image);
 fclose($fp);
 
-$image = mysqli_real_escape_string($conn, $full_path);
+$image = mysqli_real_escape_string($conn, $image_path);
 $title = mysqli_real_escape_string($conn, $jin->title);
 $text = mysqli_real_escape_string($conn, $jin->text);
 $author = mysqli_real_escape_string($conn, $jin->author);
