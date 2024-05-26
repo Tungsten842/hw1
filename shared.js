@@ -1,9 +1,9 @@
 function toggle_bar() {
-  var x = document.querySelector(".left-bar");
-  var z = document.querySelector(".left-bar-logo");
+  let x = document.querySelector(".left-bar");
+  let z = document.querySelector(".left-bar-logo");
 
   x.classList.toggle("toggle_bar");
-  var y = document.querySelector("#mask");
+  let y = document.querySelector("#mask");
   if (y.style.display === "flex") {
     y.style.display = "none";
     z.style.display = "none";
@@ -15,8 +15,8 @@ function toggle_bar() {
 }
 
 function login_popup() {
-  var x = document.querySelector(".login-register-form");
-  var y = document.querySelector("#mask");
+  let x = document.querySelector(".login-register-form");
+  let y = document.querySelector("#mask");
   if (x.style.display === "flex") {
     x.style.display = "none";
   } else {
@@ -49,7 +49,7 @@ async function auth_prompt(type) {
     }
   }
 
-  var formData = new FormData();
+  let formData = new FormData();
   form = document.querySelector(".login-register-form");
 
   for (let element of form.elements) {

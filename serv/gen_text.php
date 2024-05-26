@@ -1,7 +1,7 @@
 <?php
 require 'token.php';
 // read body
-$input = file_get_contents('php://input');
+$json = json_decode(file_get_contents('php://input'));
 
 $curl = curl_init("https://api.cohere.com/v1/chat");
 #$curl = curl_init("https://api-inference.huggingface.co/models/meta-llama/Meta-Llama-3-8B-Instruct");
@@ -17,13 +17,20 @@ $header = [
 ];
 */
 
-#$prompt = "<|begin_of_text|>" . "<|start_header_id|>user<|end_header_id|>" . $input . "<|start_header_id|>assistant<|end_header_id|>";
-$prompt = "$input";
+$prompt = $json->message;
+#$prompt = "<|begin_of_text|>" . "<|start_header_id|>user<|end_header_id|>" . $json->message . "<|start_header_id|>assistant<|end_header_id|>";
+
+if (property_exists($json, "temperature")) {
+    $temperature = $json->temperature;
+} else {
+    $temperature = 0.1;
+}
 
 $jreq = array(
     "model" => "command-r-plus",
     "message" => $prompt,
-    "temperature" => 0.1,
+    "preamble" => $json->preamble,
+    "temperature" => $temperature
 );
 /*
 $jreq = array(
@@ -46,7 +53,7 @@ $tmp = curl_exec($curl);
 
 $httpcode = curl_getinfo($curl, CURLINFO_RESPONSE_CODE);
 if ($httpcode != 200) {
-    exit("Api error: " + $tmp);
+    exit("Api error: " . $tmp);
 }
 curl_close($curl);
 

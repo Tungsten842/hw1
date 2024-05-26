@@ -19,7 +19,7 @@ async function load_articles() {
   //console.log(sec_articles);
   main_view.innerHTML += '<div class="secondary-articles"></div>';
   let sec_articles = document.querySelector('.secondary-articles');
-  for (let i = 1; i < 3 && i < article_num; i++) {
+  for (let i = 1; i < 6 && i < article_num; i++) {
     sec_articles.innerHTML += `
       <a href="article.php?id=${data[i].id}" class="article-block">
         <div class="article-block-category">${data[i].categories[0]}</div>
