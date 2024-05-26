@@ -18,10 +18,13 @@ async function submit_article() {
 }
 
 async function generate_apis() {
+  let button = document.querySelector("#but-sub");
+  button.classList.add("button-prev");
   await Promise.all([
     generate_text(),
     generate_image(),
   ]);
+  button.classList.remove("button-prev");
 }
 async function generate_image() {
   const body = document.querySelector("#prompt-text").value;
@@ -111,7 +114,7 @@ async function generate_author() {
 
   let body = new Object();
   body.preamble = "Generate a random full name, do not write anything else execept for the name:";
-  body.message = rbox.textContent;
+  body.message = "Generate a random full name";
   body.temperature = 1.0;
 
   response = await fetch("/serv/gen_text.php", {

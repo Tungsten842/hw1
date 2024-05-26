@@ -298,6 +298,19 @@ a {
 }
 
 /* Buttons style*/
+.button-prev {
+  background-color: #ff2626;
+  border-color: black;
+  color: black;
+
+  &:hover {
+    background-color: red;
+    color: black;
+    transition: 0.2s;
+  }
+
+}
+
 button,
 input[type=submit],
 input[type=button] {
@@ -310,15 +323,14 @@ input[type=button] {
   cursor: pointer;
   border-color: #04AA6D;
   color: green;
+
+  &:hover {
+    background-color: #04AA6D;
+    color: white;
+    transition: 0.2s;
+  }
 }
 
-button:hover,
-input[type=submit]:hover,
-input[type=button]:hover {
-  background-color: #04AA6D;
-  color: white;
-  transition: 0.2s;
-}
 
 article {
   background-color: #f4f4f4;
