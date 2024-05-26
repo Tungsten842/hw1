@@ -21,7 +21,7 @@ require("header.php");
 <article>
     <div class=article-title></div>
     <div class=article-divider>
-        <img class=article-image src="data:," alt>
+        <img class=article-image src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt>
         <div class=article-text></div>
     </div>
     <div class=article-author></div>
