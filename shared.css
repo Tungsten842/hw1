@@ -204,6 +204,7 @@
   display: none;
   flex-direction: column;
   justify-content: space-evenly;
+  border-radius: 20px;
   z-index: 10;
   background-image: linear-gradient(to left top, #1f7832, #2e893f, #3c9a4d, #4aac5b, #58be6a, #5aca6c, #5cd56d, #5ee16e, #54e960, #4bf04e, #41f836, #38ff00);
   box-shadow: 10px 5px 5px black;
