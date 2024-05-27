@@ -67,3 +67,19 @@ async function auth_prompt(type) {
     window.location.href = "";
   }
 }
+
+async function get_categories() {
+  const response = await fetch("/serv/get_categories.php", {
+    method: "POST",
+  });
+  const categories = await response.json();
+  const cat_bar = document.querySelector("#categories");
+  for (let i = 0; i < categories.length; i++) {
+    let category = document.createElement('a');
+    category.href = 'https://www.example.com';
+    category.textContent = categories[i].name;
+    category.className = "bar-item";
+    cat_bar.appendChild(category);
+  }
+}
+get_categories();

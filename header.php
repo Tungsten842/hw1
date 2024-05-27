@@ -25,27 +25,19 @@
         <a href="./"><img src="img/logo.png" alt="logo" class=logo-item></a>
 
         <?php if (isset($_SESSION["admin"]) && $_SESSION["admin"] == 1) { ?>
-            <a href="generate.php">Generate</a>
+            <a class=user-in href="generate.php">Generate</a>
         <?php } ?>
 
         <?php if (isset($_SESSION["user_id"])) { ?>
-            <a href="serv/logout.php">Logout</a>
-            <a href="serv/remove_account.php">Delete</a>
+            <a class=user-in href="serv/logout.php">Logout</a>
+            <a class=user-in href="serv/remove_account.php">Delete</a>
         <?php } ?>
 
         <?php if (!isset($_SESSION["user_id"])) { ?>
-            <div class=login-item onclick="login_popup()">Login</div>
+            <div class="login-item user-in" onclick="login_popup()">Login</div>
         <?php } ?>
 
-        <div class=bar-item> Startup</div>
-        <div class=bar-item> Venture</div>
-        <div class=bar-item> Security</div>
-        <div class=bar-item> AI</div>
-        <div class=bar-item> Crypto</div>
-        <div class=bar-item> Apps</div>
-        <div class=bar-item> Events</div>
-        <div class=bar-item> Startup Battlefield</div>
-        <div class=bar-item> More</div>
+        <div id=categories></div>
     </nav>
 
     <form class=login-register-form>
