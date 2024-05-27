@@ -47,3 +47,13 @@ CREATE TABLE Comments (
   FOREIGN KEY (article_id) REFERENCES Articles(id),
   FOREIGN KEY (user_id) REFERENCES Users(id)
 );
+
+DELIMITER //
+CREATE TRIGGER delete_user_comments
+BEFORE DELETE ON Users
+FOR EACH ROW
+BEGIN
+    DELETE FROM Comments
+    WHERE user_id = OLD.id;
+END //
+DELIMITER ;

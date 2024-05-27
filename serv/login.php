@@ -1,11 +1,6 @@
 <?php
 session_start();
 
-//$name = $_POST['name'];
-
-// Set session variables
-//$_SESSION["error"] = "green";
-
 if ($_POST['email'] === "") {
     exit("Your must insert an email.");
 }

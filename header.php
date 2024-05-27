@@ -30,6 +30,7 @@
 
         <?php if (isset($_SESSION["user_id"])) { ?>
             <a href="serv/logout.php">Logout</a>
+            <a href="serv/remove_account.php">Delete</a>
         <?php } ?>
 
         <?php if (!isset($_SESSION["user_id"])) { ?>
