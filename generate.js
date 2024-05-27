@@ -1,18 +1,9 @@
+let article = new Object();
+
 async function submit_article() {
-  let body = new Object();
-
-  body.title = document.querySelector(".article-title").textContent;
-  body.text = document.querySelector(".article-text").textContent;
-  body.author = document.querySelector(".article-author").textContent;
-  body.comments = document.querySelector(".article-comments").textContent;
-  body.categories = document.querySelector(".article-categories").textContent;
-
-  image = document.querySelector(".article-image").src;
-  body.image = image.replace("data:image/jpg;base64,", "");
-
   const response = await fetch("/serv/submit_article.php", {
     method: "POST",
-    body: JSON.stringify(body),
+    body: JSON.stringify(article),
   });
   await response.text();
 }
@@ -33,7 +24,9 @@ async function generate_image() {
     body: body,
   });
   const img = document.querySelector(".article-image");
-  img.src = "data:image/jpg;base64," + await response.text();
+  article.image = await response.text();
+  img.src = "data:image/jpg;base64," + article.image;
+
 }
 async function generate_text() {
   //TEXT
@@ -48,7 +41,8 @@ async function generate_text() {
     body: JSON.stringify(body),
   });
   const rbox = document.querySelector(".article-text");
-  rbox.textContent = await response.text();
+  article.text = await response.text();
+  rbox.textContent = article.text;
 
   await Promise.all([
     generate_title(),
@@ -70,8 +64,9 @@ async function generate_title() {
     method: "POST",
     body: JSON.stringify(body),
   });
+  article.title = await response.text();
   const l_rbox = document.querySelector(".article-title");
-  l_rbox.textContent = await response.text();
+  l_rbox.textContent = article.title;
 }
 
 async function generate_comments() {
@@ -79,17 +74,19 @@ async function generate_comments() {
   const rbox = document.querySelector(".article-text");
 
   let body = new Object();
-  const comment_num = Math.floor(Math.random() * 5) + 3;
+  const comment_num = Math.floor(Math.random() * 3) + 1;
   body.preamble = `Generate ${comment_num} realistic comments for this article, write them as an array of name and text in json, Do not write anything else except for the JSON,
      you must always TERMINATE the JSON array and write 100% correct JSON`;
   body.message = rbox.textContent;
 
-  response = await fetch("/serv/gen_text.php", {
+  const response = await fetch("/serv/gen_text.php", {
     method: "POST",
     body: JSON.stringify(body),
   });
+
+  article.comments = await response.json();
   const c_rbox = document.querySelector(".article-comments");
-  c_rbox.textContent = await response.text();
+  c_rbox.textContent = JSON.stringify(article.comments);
 }
 
 async function generate_categories() {
@@ -104,14 +101,13 @@ async function generate_categories() {
     method: "POST",
     body: JSON.stringify(body),
   });
+  article.categories = await response.json();
   const ca_rbox = document.querySelector(".article-categories");
-  ca_rbox.textContent = await response.text();
+  ca_rbox.textContent = JSON.stringify(article.categories);
 }
 
 async function generate_author() {
   // AUTHOR
-  const rbox = document.querySelector(".article-text");
-
   let body = new Object();
   body.preamble = "Generate a random full name, do not write anything else execept for the name:";
   body.message = "Generate a random full name";
@@ -121,8 +117,9 @@ async function generate_author() {
     method: "POST",
     body: JSON.stringify(body),
   });
+  article.author = await response.text();
   const a_rbox = document.querySelector(".article-author");
-  a_rbox.textContent = await response.text();
+  a_rbox.textContent = article.author;
 }
 
 

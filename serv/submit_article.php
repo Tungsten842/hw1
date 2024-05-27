@@ -6,7 +6,6 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"] !== 1) {
 // read body
 $input = file_get_contents('php://input');
 $jin = json_decode($input);
-
 // Create connection
 $conn = mysqli_connect("localhost", "website", "", "website");
 // Check connection
@@ -35,7 +34,7 @@ $result = mysqli_query($conn, $query);
 $article_id = mysqli_insert_id($conn);
 
 # Insert categories
-$categories = json_decode($jin->categories);
+$categories = $jin->categories;
 for ($i = 0; $i < count($categories); $i++) {
 
     $cat = mysqli_real_escape_string($conn, $categories[$i]);
@@ -58,7 +57,7 @@ for ($i = 0; $i < count($categories); $i++) {
 }
 
 # Insert comments
-$comments = json_decode($jin->comments);
+$comments = $jin->comments;
 
 for ($i = 0; $i < count($comments); $i++) {
     $name = mysqli_real_escape_string($conn, $comments[$i]->name);

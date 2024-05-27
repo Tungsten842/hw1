@@ -42,7 +42,7 @@ if ($platform == "huggingface") {
     $jreq = array(
         "inputs" => $prompt,
         "parameters" => array(
-            "max_new_tokens" => 2000,
+            "max_new_tokens" => 250,
             "return_full_text" => false
         )
     );
