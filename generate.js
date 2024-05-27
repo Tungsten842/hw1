@@ -10,7 +10,7 @@ async function submit_article() {
   image = document.querySelector(".article-image").src;
   body.image = image.replace("data:image/jpg;base64,", "");
 
-  const response = await fetch("/serv/load_articles.php", {
+  const response = await fetch("/serv/submit_article.php", {
     method: "POST",
     body: JSON.stringify(body),
   });

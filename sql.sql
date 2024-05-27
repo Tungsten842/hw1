@@ -49,6 +49,21 @@ CREATE TABLE Comments (
 );
 
 DELIMITER //
+
+CREATE TRIGGER before_article_delete
+BEFORE DELETE ON Articles
+FOR EACH ROW
+BEGIN
+  DELETE FROM Comments WHERE article_id = OLD.id;
+
+  DELETE FROM Articles_Categories WHERE article_id = OLD.id;
+
+  DELETE c FROM Categories c
+  LEFT JOIN Articles_Categories ac ON c.id = ac.category_id
+  WHERE ac.category_id IS NULL;
+END //
+
+
 CREATE TRIGGER delete_user_comments
 BEFORE DELETE ON Users
 FOR EACH ROW
@@ -56,4 +71,5 @@ BEGIN
     DELETE FROM Comments
     WHERE user_id = OLD.id;
 END //
+
 DELIMITER ;

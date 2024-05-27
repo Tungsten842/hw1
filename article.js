@@ -5,7 +5,6 @@ function get_article_id() {
 }
 
 async function remove_comment(id) {
-  //load_article()
   let formData = new FormData()
   formData.append("id", id)
   const response = await fetch("/serv/remove_comment.php", {
@@ -31,14 +30,14 @@ async function load_article() {
   content = document.querySelector("article");
   content.innerHTML = "";
   const html = `
-      <div class=article-title>${article.title}</div>
-      <div class=article-divider>
-          <img class=article-image src=${article.image} alt >
-          <div class=article-text>${article.text}</div>
-      </div>
-      <div class=article-author>${article.author}</div>
-      <div class=article-categories>${article.categories}</div>
-    `;
+    <div class=article-title>${article.title}</div>
+    <div class=article-divider>
+      <img class=article-image src=${article.image} alt >
+      <div class=article-text>${article.text}</div>
+    </div>
+    <div class=article-author>${article.author}</div>
+    <div class=article-categories>${article.categories}</div>
+  `;
   content.insertAdjacentHTML("afterbegin", html);
 
   comments = document.querySelector(".article-comments");

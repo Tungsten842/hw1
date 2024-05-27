@@ -3,3 +3,8 @@
   height: 400px;
   object-fit: contain;
 }
+
+#rm_article {
+  margin-left: auto;
+  margin-right: auto;
+}
