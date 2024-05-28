@@ -41,8 +41,12 @@ async function generate_text() {
     body: JSON.stringify(body),
   });
   const rbox = document.querySelector(".article-text");
-  article.text = await response.text();
-  rbox.textContent = article.text;
+
+  article.text = "";
+  for await (const chunk of response.body) {
+    article.text += new TextDecoder('utf-8').decode(chunk);;
+    rbox.textContent = article.text;
+  }
 
   await Promise.all([
     generate_title(),
@@ -64,9 +68,14 @@ async function generate_title() {
     method: "POST",
     body: JSON.stringify(body),
   });
-  article.title = await response.text();
   const l_rbox = document.querySelector(".article-title");
   l_rbox.textContent = article.title;
+
+  article.title = "";
+  for await (const chunk of response.body) {
+    article.title += new TextDecoder('utf-8').decode(chunk);;
+    l_rbox.textContent = article.title;
+  }
 }
 
 async function generate_comments() {
@@ -84,9 +93,14 @@ async function generate_comments() {
     body: JSON.stringify(body),
   });
 
-  article.comments = await response.json();
   const c_rbox = document.querySelector(".article-comments");
-  c_rbox.textContent = JSON.stringify(article.comments);
+
+  article.comments = "";
+  for await (const chunk of response.body) {
+    article.comments += new TextDecoder().decode(chunk);;
+    c_rbox.textContent = article.comments;
+  }
+  article.comments = JSON.parse(article.comments);
 }
 
 async function generate_categories() {
@@ -94,16 +108,21 @@ async function generate_categories() {
   const rbox = document.querySelector(".article-text");
 
   let body = new Object();
-  body.preamble = "Generate 4 categories, write it as an array of string in json for this article, every category must be a single word, respond in pure json";
+  body.preamble = 'Generate a JSON array of 4 random categories, every category must be a single word, DO NOT WRITE ANYTHING ELSE EXCEPT FOR THE JSON ARRAY';
   body.message = rbox.textContent;
 
   response = await fetch("/serv/gen_text.php", {
     method: "POST",
     body: JSON.stringify(body),
   });
-  article.categories = await response.json();
   const ca_rbox = document.querySelector(".article-categories");
-  ca_rbox.textContent = JSON.stringify(article.categories);
+
+  article.categories = "";
+  for await (const chunk of response.body) {
+    article.categories += new TextDecoder('utf-8').decode(chunk);;
+    ca_rbox.textContent = article.categories;
+  }
+  article.categories = JSON.parse(article.categories);
 }
 
 async function generate_author() {
@@ -117,9 +136,13 @@ async function generate_author() {
     method: "POST",
     body: JSON.stringify(body),
   });
-  article.author = await response.text();
   const a_rbox = document.querySelector(".article-author");
-  a_rbox.textContent = article.author;
+
+  article.author = "";
+  for await (const chunk of response.body) {
+    article.author += new TextDecoder('utf-8').decode(chunk);;
+    a_rbox.textContent = article.author;
+  }
 }
 
 
