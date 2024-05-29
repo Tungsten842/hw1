@@ -72,6 +72,7 @@ if ($platform == "groq") {
     $jreq->messages[1]->role = "user";
     $jreq->messages[1]->content = "$json->message";
     $jreq->model = "llama3-70b-8192";
+    $jreq->max_tokens = 1024;
     $jreq->stream = true;
 }
 
@@ -83,20 +84,19 @@ curl_setopt($curl, CURLOPT_HTTPHEADER, $header);
 curl_setopt($curl, CURLOPT_POSTFIELDS, $payload);
 ob_implicit_flush(true);
 
-$counter = 0;
-$broken_str = '';
-function contains_text($j)
+function no_text($j)
 {
     if (property_exists($j->choices[0]->delta, 'content')) {
-        return true;
+        echo $j->choices[0]->delta->content;
     } else {
-        return false;
+        return true;
     }
 }
-function parse_stream($data)
-{
+$counter = 0;
+$buffer = "";
+$parse_stream = function ($curl, $data) {
     $single = explode('data:', $data);
-    global $counter, $broken_str;
+    global $counter, $buffer;
     for ($i = 0; $i < count($single); $i++) {
         if (empty($single[$i])) {
             continue;
@@ -104,41 +104,27 @@ function parse_stream($data)
         $j = json_decode($single[$i]);
         if ($j === null) {
             if ($counter == 1) {
-                $full_str = $broken_str . $single[$i];
-                /*
-                echo "\n";
-                echo "AAAAAAAAAAAA";
-                echo "\n";
-                echo $full_str . "BBBBBBBBBBBBBB";
-                echo "\n";
-                */
-                $nj = json_decode($full_str);
+                $buffer .= $single[$i];
+                $nj = json_decode($buffer);
                 if ($nj == null) {
-                    echo "\n";
-                    echo "AAAAAAAAAAAA: " . $broken_str;
-                    echo "\n";
-                    echo "BBBBBBBBBBBBBB: " . $single[$i];
-                    echo "\n";
+                    continue;
                 }
-                if (contains_text($nj)) {
-                    echo $nj->choices[0]->delta->content;
-                } else {
+                if (no_text($nj)) {
                     continue;
                 }
                 $counter = 0;
             } else {
-                $broken_str = $single[$i];
+                $buffer .= $single[$i];
                 $counter = 1;
             }
         } else {
-            if (contains_text($j)) {
-                echo $j->choices[0]->delta->content;
-            } else {
+            if (no_text($j)) {
                 continue;
             }
         }
     }
-}
+    return strlen($data);
+};
 
 if ($platform == "huggingface") {
     $callback = function ($curl, $data) {
@@ -150,15 +136,7 @@ if ($platform == "huggingface") {
     };
 }
 
-
-if ($platform == "groq") {
-    $callback = function ($curl, $data) {
-        parse_stream($data);
-        return strlen($data);
-    };
-}
-curl_setopt($curl, CURLOPT_WRITEFUNCTION, $callback);
-
+curl_setopt($curl, CURLOPT_WRITEFUNCTION, $parse_stream);
 
 $tmp = curl_exec($curl);
 
@@ -167,13 +145,3 @@ if ($httpcode != 200) {
     exit("Api error: " . $tmp);
 }
 curl_close($curl);
-/*
-if ($platform == "cohere") {
-    $result = json_decode($tmp)->text;
-}
-if ($platform == "huggingface") {
-    $result = json_decode($tmp)[0]->generated_text;
-}
-
-exit($result);
-*/

@@ -83,7 +83,7 @@ async function generate_comments() {
   const rbox = document.querySelector(".article-text");
 
   let body = new Object();
-  const comment_num = Math.floor(Math.random() * 3) + 1;
+  const comment_num = Math.floor(Math.random() * 6) + 3;
   body.preamble = `Generate ${comment_num} realistic comments for this article, write them as an array of name and text in json, Do not write anything else except for the JSON,
      you must always TERMINATE the JSON array and write 100% correct JSON`;
   body.message = rbox.textContent;
