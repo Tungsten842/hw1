@@ -1,9 +1,3 @@
-function get_article_id() {
-  const params = new URLSearchParams(window.location.search);
-  const id = params.get("id");
-  return id;
-}
-
 async function remove_comment(id) {
   let formData = new FormData()
   formData.append("id", id)

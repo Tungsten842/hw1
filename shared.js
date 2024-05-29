@@ -1,3 +1,15 @@
+function get_article_id() {
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get("id");
+  return id;
+}
+
+function get_category_id() {
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get("cid");
+  return id;
+}
+
 function toggle_bar() {
   let x = document.querySelector(".left-bar");
   let z = document.querySelector(".left-bar-logo");
@@ -76,7 +88,7 @@ async function get_categories() {
   const cat_bar = document.querySelector("#categories");
   for (let i = 0; i < categories.length; i++) {
     let category = document.createElement('a');
-    category.href = 'https://www.example.com';
+    category.href = '/?cid=' + categories[i].id;
     category.textContent = categories[i].name;
     category.className = "bar-item";
     cat_bar.appendChild(category);

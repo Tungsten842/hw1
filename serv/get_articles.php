@@ -10,11 +10,20 @@ if (!$conn) {
     exit("Connection failed: " . mysqli_connect_error());
 }
 
+$query = "SELECT title,text,image,author,id FROM Articles ORDER BY date DESC";
+
+if (isset($input->category_id)) {
+    $query = "SELECT Articles.title,Articles.text,Articles.image,Articles.author,Articles.id
+      FROM Categories
+      JOIN Articles_Categories ON Categories.id = Articles_Categories.category_id
+      JOIN Articles ON Articles_Categories.article_id = Articles.id
+      WHERE Categories.id = '$input->category_id'";
+}
+
 if (isset($input->id)) {
     $query = "SELECT title,text,image,author,id FROM Articles WHERE id = $input->id";
-} else {
-    $query = "SELECT title,text,image,author,id FROM Articles ORDER BY date DESC";
 }
+
 $articles_list = mysqli_query($conn, $query);
 $articles_num = mysqli_num_rows($articles_list);
 
@@ -63,7 +72,7 @@ for ($i = 0; $i < $articles_num; $i++) {
     }
 
     #CATEGORIES 
-    $query = "SELECT Categories.name FROM Categories
+    $query = "SELECT Categories.name,Categories.id FROM Categories
       JOIN Articles_Categories ON Categories.id = Articles_Categories.category_id
       JOIN Articles ON Articles_Categories.article_id = Articles.id
       WHERE Articles.id = '$article_id'";
@@ -72,8 +81,10 @@ for ($i = 0; $i < $articles_num; $i++) {
 
     $categories[] = array();
     for ($j = 0; $j < $row_num; ++$j) {
-        $row = mysqli_fetch_row($result);
-        $categories[$j] = $row[0];
+        $row = mysqli_fetch_assoc($result);
+        $categories[$j] = new stdClass();
+        $categories[$j]->name = $row["name"];
+        $categories[$j]->id = $row["id"];
     }
 
     $raw_req[$i] = array(
