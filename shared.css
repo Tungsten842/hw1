@@ -175,6 +175,7 @@
       flex-direction: column;
       margin-right: 30px;
       min-width: calc(var(--text-scaling-dim)*18);
+      max-width: 20%;
 
       .various-articles-article-category {
         color: #00d301;
@@ -194,8 +195,8 @@
     .various-articles-article-text {
       padding-top: 0px;
       color: gray;
+      text-align: justify;
     }
-
   }
 }
 
