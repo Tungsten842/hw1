@@ -51,13 +51,14 @@ for ($i = 0; $i < $articles_num; $i++) {
             $comments[$j]->name = $row["name"];
             $comments[$j]->text = $row["text"];
             $comments[$j]->id = $row["id"];
+            $comments[$j]->can_delete = true;
         }
     } else {
         $user_comments_num  = 0;
     }
 
     # GENERATED COMMENTS
-    $query = "SELECT Comments.name,Comments.text FROM Comments JOIN Articles
+    $query = "SELECT Comments.id,Comments.name,Comments.text FROM Comments JOIN Articles
          ON Comments.article_id = Articles.id
          WHERE Articles.id = $article_id AND Comments.user_id IS NULL";
     $result = mysqli_query($conn, $query);
@@ -69,6 +70,10 @@ for ($i = 0; $i < $articles_num; $i++) {
         $comments[$j] = new stdClass();
         $comments[$j]->name = $row["name"];
         $comments[$j]->text = $row["text"];
+        $comments[$j]->id = $row["id"];
+        if (isset($_SESSION["admin"]) && $_SESSION["admin"] == 1) {
+            $comments[$j]->can_delete = true;
+        }
     }
 
     #CATEGORIES 

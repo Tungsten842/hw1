@@ -84,9 +84,8 @@ async function generate_comments() {
 
   let body = new Object();
   const comment_num = Math.floor(Math.random() * 6) + 3;
-  body.preamble = `Generate ${comment_num} realistic comments for this article, write them as an array of name and text in json, Do not write anything else except for the JSON,
-     you must always TERMINATE the JSON array and write 100% correct JSON`;
-  body.message = rbox.textContent;
+  body.preamble = "You are an assistant that only speaks JSON. Do not write normal text";
+  body.message = `Generate ${comment_num} realistic comments for this article, write them as an array of name and text, Article: ` + rbox.textContent;
 
   const response = await fetch("/serv/gen_text.php", {
     method: "POST",

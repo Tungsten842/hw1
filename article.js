@@ -8,7 +8,6 @@ async function remove_comment(id) {
   console.log(response);
   load_article();
 }
-
 async function load_article() {
   const request = { id: get_article_id() };
 
@@ -42,16 +41,20 @@ async function load_article() {
     single_comment.className = 'single-comment';
     comments.appendChild(single_comment);
 
+    if (comm.can_delete) {
+      const comment_delete = document.createElement('div');
+      comment_delete.className = 'comment-delete';
+      comment_delete.textContent = "✕";
+      single_comment.appendChild(comment_delete);
+      comment_delete.addEventListener('click', function() {
+        remove_comment(comm.id);
+      });
+    }
+
     const comment_name = document.createElement('div');
     comment_name.className = 'comment-name';
     comment_name.textContent = comm.name;
     single_comment.appendChild(comment_name);
-
-    const comment_delete = document.createElement('div');
-    comment_delete.className = 'comment-delete';
-    comment_delete.textContent = "✕";
-    comment_delete.onclick = function() { remove_comment(comm.id) };
-    single_comment.appendChild(comment_delete);
 
     const comment_text = document.createElement('div');
     comment_text.className = 'comment-text';
