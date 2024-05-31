@@ -1,10 +1,10 @@
 <?php
 session_start();
 
-if ($_POST['email'] === "") {
+if (!isset($_POST['email']) || $_POST['email'] === "") {
     exit("Your must insert an email.");
 }
-if ($_POST['password'] === "") {
+if (!isset($_POST['password']) || $_POST['password'] === "") {
     exit("Your must insert a password.");
 }
 

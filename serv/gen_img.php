@@ -1,6 +1,13 @@
 <?php
 require 'token.php';
-// read body
+
+if (!isset($_SESSION["user_id"])) {
+    exit("You need to be logged");
+}
+if (!isset($_SESSION["admin"]) || $_SESSION["admin"] !== 1) {
+    exit("You must be an Administrator");
+}
+
 $prompt = file_get_contents('php://input');
 
 $curl = curl_init("https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-xl-base-1.0");
@@ -21,9 +28,6 @@ curl_setopt($curl, CURLOPT_POSTFIELDS, $payload);
 curl_setopt($curl, CURLOPT_HTTPHEADER, $header);
 
 $image = curl_exec($curl);
-
-//$response_data = json_decode($response);
-//$image = $responseData['image']; // adjust the key as needed
 
 curl_close($curl);
 

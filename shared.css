@@ -24,6 +24,7 @@
   .bar-item {
     padding-top: 5px;
     padding-bottom: 5px;
+    font-size: calc(var(--text-scaling-dim)*1);
   }
 
   .bar-item:hover {

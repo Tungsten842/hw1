@@ -39,9 +39,14 @@ async function auth_prompt(type) {
     body: formData,
   });
   const text = await response.text();
+  if (text.localeCompare("Your account has been created.") === 0) {
+    window.location.href = "/login.php";
+  }
+
   if (text.localeCompare("You have been logged in successfully.") === 0) {
     window.location.href = "/";
   }
+
   error(text);
 }
 
