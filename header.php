@@ -29,7 +29,6 @@
         <?php } ?>
 
         <?php if (isset($_SESSION["user_id"])) { ?>
-            <a class=user-in href="serv/logout.php">Logout</a>
             <a class=user-in href="serv/remove_account.php">Delete</a>
         <?php } ?>
 
@@ -38,6 +37,10 @@
         <?php } ?>
 
         <div id=categories></div>
+        <?php if (isset($_SESSION["user_id"])) { ?>
+            <a class="user-in logout" href="serv/logout.php">Logout</a>
+        <?php } ?>
+
     </nav>
 
     <div id=mask onclick="toggle_bar()"></div>
