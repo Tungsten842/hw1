@@ -34,23 +34,12 @@
         <?php } ?>
 
         <?php if (!isset($_SESSION["user_id"])) { ?>
-            <div class="login-item user-in" onclick="login_popup()">Login</div>
+            <a href="/login.php" class="login-item user-in">Login</a>
         <?php } ?>
 
         <div id=categories></div>
     </nav>
 
-    <form class=login-register-form>
-        <input type="text" name="name" class="username-form" placeholder="Name">
-        <input type="text" name="surname" class="username-form" placeholder="Surname">
-        <input type="text" name="email" class=username-form placeholder="Email">
-        <input type="password" name="password" class=password-form placeholder="Password">
-        <p id=login-error></p>
-        <div class=login-register-button>
-            <input type="button" name="register" value="Register" onclick="auth_prompt('register')">
-            <input type="button" name="login" value="Login" onclick="auth_prompt('login')">
-        </div>
-    </form>
-    <div id=mask onclick="login_popup()"></div>
+    <div id=mask onclick="toggle_bar()"></div>
 
     <div class=content>

@@ -1,17 +1,15 @@
 <?php
 
-if ($_POST['name'] === "") {
+if (!isset($_POST['name']) || $_POST['name'] === "") {
     exit("Your must insert a name.");
 }
-if ($_POST['surname'] === "") {
+if (!isset($_POST['surname']) || $_POST['surname'] === "") {
     exit("Your must insert a surname.");
 }
-if ($_POST['email'] === "") {
-
+if (!isset($_POST['email']) || $_POST['email'] === "") {
     exit("Your must insert an email.");
 }
-if ($_POST['password'] === "") {
-
+if (!isset($_POST['password']) || $_POST['password'] === "") {
     exit("Your must insert a password.");
 }
 if (strlen($_POST['name']) >= 30) {
@@ -23,7 +21,6 @@ if (strlen($_POST['surname']) >= 30) {
 if (strlen($_POST['email']) >= 30) {
     exit("Your email must be shorter that 30 characters.");
 }
-
 
 if (!preg_match("/^[a-zA-Z-' ]*$/", $_POST['name'])) {
     exit("You must insert a valid name.");
