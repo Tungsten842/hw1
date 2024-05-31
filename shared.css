@@ -321,7 +321,6 @@ input[type=button] {
   }
 }
 
-
 article {
   margin: 30px auto;
   background-color: #f4f4f4;
@@ -364,7 +363,24 @@ article {
     font-style: italic;
   }
 
-  .article-categories {}
+  .article-categories {
+    font-size: calc(var(--text-scaling-dim)*1.20);
+    font-weight: 400;
+    color: grey;
+    margin-left: auto;
+
+    .single-category {
+      font-style: italic;
+      margin-right: 20px;
+      text-decoration: underline;
+
+      &:hover {
+        opacity: 0.5;
+        transition: 0.2s;
+      }
+    }
+
+  }
 }
 
 .comment-section {

@@ -24,14 +24,23 @@ async function load_article() {
   content.innerHTML = "";
   const html = `
     <div class=article-title>${article.title}</div>
+    <div class=article-categories></div>
     <div class=article-divider>
       <img class=article-image src=${article.image} alt >
       <div class=article-text>${article.text}</div>
     </div>
     <div class=article-author>${article.author}</div>
-    <div class=article-categories>${article.categories}</div>
   `;
   content.insertAdjacentHTML("afterbegin", html);
+
+  const cat_html = document.querySelector(".article-categories");
+  for (const category of article.categories) {
+    const single_category = document.createElement('a');
+    single_category.className = 'single-category';
+    single_category.textContent = category.name;
+    single_category.href = "/?cid=" + category.id;
+    cat_html.appendChild(single_category);
+  }
 
   comments = document.querySelector(".article-comments");
   comments.innerHTML = "";
