@@ -1,20 +1,50 @@
-#form-generate {
-  margin: 0 auto;
+#t-divider {
   display: flex;
-  flex-direction: column;
+  align-items: center;
 
-  #prompt-text {}
-
-  #buttons-generate {
+  #form-generate {
+    transform: translate(-50%, 0);
+    margin-left: 50%;
     display: flex;
+    flex-direction: column;
 
-    #but-gen {
-      width: 50%;
+    #prompt-text {}
+
+    #buttons-generate {
+      display: flex;
+
+      #but-gen {
+        width: 50%;
+      }
+
+      #but-sub {
+        width: 50%;
+      }
+
     }
-
-    #but-sub {
-      width: 50%;
-    }
-
   }
+}
+
+.loader {
+  display: none;
+  border: 12px solid #f3f3f3;
+  border-top: 12px solid #3498db;
+  border-radius: 50%;
+  width: calc(var(--text-scaling-dim)*3);
+  height: calc(var(--text-scaling-dim)*3);
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.show {
+  display: block;
 }

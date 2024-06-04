@@ -9,13 +9,14 @@ async function submit_article() {
 }
 
 async function generate_apis() {
-  let button = document.querySelector("#but-sub");
-  button.classList.add("button-prev");
+  let loader = document.querySelector(".loader");
+
+  loader.classList.add("show");
   await Promise.all([
     generate_text(),
     generate_image(),
   ]);
-  button.classList.remove("button-prev");
+  loader.classList.remove("show");
 }
 async function generate_image() {
   const body = document.querySelector("#prompt-text").value;
@@ -102,14 +103,15 @@ async function generate_comments() {
     body: JSON.stringify(body),
   });
 
-  const c_rbox = document.querySelector(".article-comments");
-
   article.comments = "";
   for await (const chunk of response.body) {
     article.comments += new TextDecoder().decode(chunk);;
-    c_rbox.textContent = article.comments;
   }
-  article.comments = JSON.parse(article.comments);
+  try {
+    article.comments = JSON.parse(article.comments);
+  } catch (e) {
+    return console.log(e);
+  }
 }
 
 async function generate_categories() {
@@ -124,14 +126,24 @@ async function generate_categories() {
     method: "POST",
     body: JSON.stringify(body),
   });
-  const ca_rbox = document.querySelector(".article-categories");
 
   article.categories = "";
-  for await (const chunk of response.body) {
-    article.categories += new TextDecoder('utf-8').decode(chunk);;
-    ca_rbox.textContent = article.categories;
+  let categories;
+  try {
+    categories = await response.json();
+  } catch (e) {
+    return console.log(e);
   }
-  article.categories = JSON.parse(article.categories);
+
+  article.categories = categories;
+
+  const cat_html = document.querySelector(".article-categories");
+  for (const category of categories) {
+    const single_category = document.createElement('a');
+    single_category.className = 'single-category';
+    single_category.textContent = category;
+    cat_html.appendChild(single_category);
+  }
 }
 
 async function generate_author() {
