@@ -1,6 +1,7 @@
 <?php
 require 'token.php';
 
+session_start();
 if (!isset($_SESSION["user_id"])) {
     exit("You need to be logged");
 }

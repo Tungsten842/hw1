@@ -5,7 +5,7 @@
   padding-right: 30px;
   display: flex;
   flex-direction: column;
-  width: calc(var(--text-scaling-dim)*8);
+  width: calc(var(--text-scaling-dim)*10);
   position: fixed;
   left: 0;
   color: gray;
@@ -40,7 +40,7 @@
   }
 
   .logo-item {
-    width: 80px;
+    width: calc(var(--text-scaling-dim)*4);
     color: white;
   }
 

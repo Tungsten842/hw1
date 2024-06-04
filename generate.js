@@ -23,9 +23,19 @@ async function generate_image() {
     method: "POST",
     body: body,
   });
-  const img = document.querySelector(".article-image");
+
   article.image = await response.text();
+
+  if (document.contains(document.querySelector(".article-image"))) {
+    document.querySelector(".article-image").remove();
+  }
+
+  const img = document.createElement("img");
   img.src = "data:image/jpg;base64," + article.image;
+  img.className = 'article-image';
+  const divider = document.querySelector(".article-divider");
+
+  divider.insertBefore(img, divider.firstChild);
 
 }
 async function generate_text() {
@@ -129,7 +139,7 @@ async function generate_author() {
   let body = new Object();
   body.preamble = "Generate a random full name, do not write anything else execept for the name:";
   body.message = "Generate a random full name";
-  body.temperature = 1.0;
+  body.temperature = 5.0;
 
   response = await fetch("/serv/gen_text.php", {
     method: "POST",
