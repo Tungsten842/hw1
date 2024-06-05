@@ -149,9 +149,8 @@ async function generate_categories() {
 async function generate_author() {
   // AUTHOR
   let body = new Object();
-  body.preamble = "Generate a random full name, do not write anything else execept for the name:";
-  body.message = "Generate a random full name";
-  body.temperature = 5.0;
+  body.preamble = "Generate a random full name for this article, do not write anything else execept for the name:";
+  body.message = document.querySelector("#prompt-text").value;;
 
   response = await fetch("/serv/gen_text.php", {
     method: "POST",

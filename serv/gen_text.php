@@ -45,6 +45,7 @@ if ($platform == "huggingface") {
     $jreq = array(
         "inputs" => $prompt,
         "parameters" => array(
+            "temperature" => $temperature,
             "max_new_tokens" => 500,
             "return_full_text" => false
         ),
