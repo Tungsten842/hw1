@@ -13,7 +13,6 @@ async function load_articles() {
     body: JSON.stringify(body)
   });
   const data = await response.json();
-  console.log(data);
 
   const main_view = document.querySelector('.main-view');
 
@@ -29,7 +28,7 @@ async function load_articles() {
   //console.log(sec_articles);
   main_view.innerHTML += '<div class="secondary-articles"></div>';
   let sec_articles = document.querySelector('.secondary-articles');
-  for (let i = 1; i < 6 && i < article_num; i++) {
+  for (let i = 1; (i < 6) && (i < article_num); i++) {
     sec_articles.innerHTML += `
       <div class="article-block">
         <a href="/?cid=${data[i].categories[0].id}" class="article-block-category">
@@ -44,7 +43,7 @@ async function load_articles() {
   //let content = document.querySelector('.content');
   //content.innerHTML += '<div class=various-articles></div>';
   const various = document.querySelector(".various-articles");
-  for (let i = 3; i < article_num; i++) {
+  for (let i = 6; i < article_num; i++) {
     various.innerHTML += `
       <div class=various-articles-article>
         <div class=various-articles-article-infos>

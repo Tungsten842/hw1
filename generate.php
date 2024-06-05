@@ -19,6 +19,7 @@ require("header.php");
         </div>
     </div>
     <div class="loader"></div>
+    <strong id=error-log></strong>
 </div>
 
 <article>

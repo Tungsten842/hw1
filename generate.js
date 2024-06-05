@@ -1,5 +1,11 @@
 let article = new Object();
 
+function abort_gen() {
+  let loader = document.querySelector(".loader");
+  loader.classList.remove("show");
+  document.querySelector("#error-log").innerHTML = "Article parsing failed, try again.";
+}
+
 async function submit_article() {
   const response = await fetch("/serv/submit_article.php", {
     method: "POST",
@@ -10,6 +16,8 @@ async function submit_article() {
 }
 
 async function generate_apis() {
+  document.querySelector("#error-log").innerHTML = "";
+
   let loader = document.querySelector(".loader");
 
   loader.classList.add("show");
@@ -111,7 +119,8 @@ async function generate_comments() {
   try {
     article.comments = JSON.parse(article.comments);
   } catch (e) {
-    return console.log(e);
+    abort_gen();
+    return;
   }
 }
 
@@ -133,7 +142,8 @@ async function generate_categories() {
   try {
     categories = await response.json();
   } catch (e) {
-    return console.log(e);
+    abort_gen();
+    return;
   }
 
   article.categories = categories;

@@ -17,7 +17,7 @@ if (isset($input->category_id)) {
       FROM Categories
       JOIN Articles_Categories ON Categories.id = Articles_Categories.category_id
       JOIN Articles ON Articles_Categories.article_id = Articles.id
-      WHERE Categories.id = '$input->category_id'";
+      WHERE Categories.id = '$input->category_id' ORDER BY date DESC";
 }
 
 if (isset($input->id)) {
