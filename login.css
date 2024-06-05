@@ -107,3 +107,7 @@ body {
   color: red;
   margin-bottom: 10px;
 }
+
+footer {
+  display: none;
+}
