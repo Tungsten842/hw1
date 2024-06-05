@@ -12,7 +12,7 @@ $query = "
     FROM Categories c
     JOIN Articles_Categories ac ON c.id = ac.category_id
     GROUP BY c.name
-    ORDER BY count DESC
+    ORDER BY count DESC, id DESC
     LIMIT 12";
 
 $result = mysqli_query($conn, $query);

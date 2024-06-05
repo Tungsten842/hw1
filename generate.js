@@ -4,6 +4,7 @@ function abort_gen() {
   let loader = document.querySelector(".loader");
   loader.classList.remove("show");
   document.querySelector("#error-log").innerHTML = "Article parsing failed, try again.";
+  document.querySelector("#error-log").style.color = "#ff0000";
 }
 
 async function submit_article() {
@@ -11,8 +12,23 @@ async function submit_article() {
     method: "POST",
     body: JSON.stringify(article),
   });
-  await response.text();
-  document.querySelector("#prompt-text").value = "";
+  const result = await response.text();
+  if (result === "") {
+    document.querySelector("#error-log").innerHTML = "Article added successfully.";
+    document.querySelector("#error-log").style.color = "#04AA6D";
+
+    document.querySelector("#prompt-text").value = "";
+    document.querySelector(".article-title").innerHTML = "";
+    document.querySelector(".article-categories").innerHTML = "";
+    document.querySelector(".article-text").innerHTML = "";
+    document.querySelector(".article-author").innerHTML = "";
+    document.querySelector(".article-comments").innerHTML = "";
+    if (document.contains(document.querySelector(".article-image"))) {
+      document.querySelector(".article-image").remove();
+    }
+  } else {
+    abort_gen();
+  }
 }
 
 async function generate_apis() {
@@ -176,5 +192,3 @@ async function generate_author() {
     a_rbox.textContent = article.author;
   }
 }
-
-
