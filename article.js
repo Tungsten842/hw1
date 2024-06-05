@@ -85,5 +85,6 @@ async function commment_prompt() {
   });
   await response.text();
   load_article()
+  document.querySelector("#user-comment-text").value = "";
 }
 

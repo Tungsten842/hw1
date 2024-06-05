@@ -6,6 +6,7 @@ async function submit_article() {
     body: JSON.stringify(article),
   });
   await response.text();
+  document.querySelector("#prompt-text").value = "";
 }
 
 async function generate_apis() {
