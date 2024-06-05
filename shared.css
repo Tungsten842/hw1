@@ -453,3 +453,41 @@ textarea {
 textarea:focus {
   border: 3px solid #555;
 }
+
+footer {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background-color: #f4f4f4;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-around;
+}
+
+bar {
+  flex: 1;
+}
+
+ul {
+  padding: 10px;
+}
+
+.tit {
+  color: #00d301;
+}
+
+.links-b:hover {
+  margin-left: 0px;
+
+  &:hover {
+    opacity: 0.5;
+    transition: 0.2s;
+  }
+}
+
+.copyright {
+  text-align: center;
+}

@@ -138,6 +138,7 @@ async function generate_categories() {
   article.categories = categories;
 
   const cat_html = document.querySelector(".article-categories");
+  cat_html.innerHTML = "";
   for (const category of categories) {
     const single_category = document.createElement('a');
     single_category.className = 'single-category';
